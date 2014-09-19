@@ -49,7 +49,6 @@
                            target: self
                            action: @selector(deleteFile:)];
   [[self navigationItem] setRightBarButtonItem: button];
-  [button release];
 }
 
 
@@ -76,9 +75,8 @@
   UITableViewCell *cell =
     [[self tableView] dequeueReusableCellWithIdentifier: @"any-cell"];
   if (cell == nil)
-    cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault
-                                   reuseIdentifier:@"any-cell"]
-            autorelease];
+    cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault
+                                   reuseIdentifier:@"any-cell"];
   [pgnFile goToGameNumber: ( int )row];
   [[cell textLabel] setText:
                       [NSString stringWithFormat: @"%@-%@ %@",
@@ -94,7 +92,6 @@
 
   GamePreview *gp = [[GamePreview alloc] initWithPGN: pgnFile gameNumber:( int )row];
   [[self navigationController] pushViewController: gp animated: YES];
-  [gp release];
   [self performSelector: @selector(deselect:) withObject: tableView
              afterDelay: 0.1f];
 }
@@ -118,21 +115,17 @@ clickedButtonAtIndex:(NSInteger)buttonIndex {
 
 
 - (void)deleteFile:(id)sender {
-  [[[[UIAlertView alloc] initWithTitle: [NSString stringWithFormat:
+  [[[UIAlertView alloc] initWithTitle: [NSString stringWithFormat:
                                                     @"Delete file %@?",
                                                   filename]
                                message: nil
                               delegate: self
                      cancelButtonTitle: @"Cancel"
-                     otherButtonTitles: @"OK", nil] autorelease]
+                     otherButtonTitles: @"OK", nil]
     show];
 }
 
 
-- (void)dealloc {
-  [pgnFile release];
-  [super dealloc];
-}
 
 
 @end

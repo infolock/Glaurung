@@ -229,7 +229,6 @@ static Move fix_castling_and_promotion(Position *p, Move m);
 -(void)dealloc {
   if (file != NULL)
     fclose(file);
-  [super dealloc];
 }
 
 @end

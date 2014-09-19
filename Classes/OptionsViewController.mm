@@ -43,12 +43,11 @@
 - (void)loadView {
   [super loadView];
   [[self navigationItem] setRightBarButtonItem:
-                           [[[UIBarButtonItem alloc]
+                           [[UIBarButtonItem alloc]
                               initWithTitle: @"Done"
                                       style: UIBarButtonItemStylePlain
                                      target: boardViewController
-                                     action: @selector(optionsMenuDonePressed)]
-                             autorelease]];
+                                     action: @selector(optionsMenuDonePressed)]];
 }
 
 
@@ -93,9 +92,8 @@
 #endif
   UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier: nil];
   if (cell == nil)
-    cell = [[[UITableViewCell alloc] initWithStyle: UITableViewCellStyleValue1
-                                   reuseIdentifier: nil]
-             autorelease];
+    cell = [[UITableViewCell alloc] initWithStyle: UITableViewCellStyleValue1
+                                   reuseIdentifier: nil];
 
   if (section == 0) {
     UISwitch *sw;
@@ -106,7 +104,6 @@
       [sw addTarget: self action: @selector(toggleShowAnalysis:)
           forControlEvents:UIControlEventValueChanged];
       [cell setAccessoryView: sw];
-      [sw release];
     }
     else if (row == 1) {
       [[cell textLabel] setText: @"Show book moves"];
@@ -115,7 +112,6 @@
       [sw addTarget: self action: @selector(toggleShowBookMoves:)
           forControlEvents:UIControlEventValueChanged];
       [cell setAccessoryView: sw];
-      [sw release];
     }
     else if (row == 2) {
       [[cell textLabel] setText: @"Show legal moves"];
@@ -124,7 +120,6 @@
       [sw addTarget: self action: @selector(toggleShowLegalMoves:)
           forControlEvents:UIControlEventValueChanged];
       [cell setAccessoryView: sw];
-      [sw release];
     }
   }
   else if (section == 1) {
@@ -137,7 +132,6 @@
           forControlEvents:UIControlEventValueChanged];
       [sw setEnabled: YES];
       [cell setAccessoryView: sw];
-      [sw release];
     }
     else {
       if (row == 1) {
@@ -200,7 +194,6 @@
       [sw addTarget: self action: @selector(toggleFigurines:)
           forControlEvents:UIControlEventValueChanged];
       [cell setAccessoryView: sw];
-      [sw release];
     }
   }
   else if (section == 3) {
@@ -250,7 +243,6 @@
                parentViewController: self];
       [[self navigationController] pushViewController: sotc
                                              animated: YES];
-      [sotc release];
     }
     else if (row == 2) {
       // Book variety
@@ -259,7 +251,6 @@
                parentViewController: self];
       [[self navigationController] pushViewController: sotc
                                              animated: YES];
-      [sotc release];
     }
     else if (row == 3) {
       // Strength
@@ -268,7 +259,6 @@
               initWithParentViewController: self];
       [[self navigationController] pushViewController: soc
                                              animated: YES];
-      [soc release];
     }
     else if (row == 4) {
       // Remote engine
@@ -277,7 +267,6 @@
                initWithParentViewController: self];
       [[self navigationController] pushViewController: retc
                                              animated: YES];
-      [retc release];
     }
   }
   else if (section == 2) {
@@ -288,7 +277,6 @@
                parentViewController: self];
       [[self navigationController] pushViewController: sotc
                                              animated: YES];
-      [sotc release];
     }
     else if (row == 1) {
       // Color scheme
@@ -297,7 +285,6 @@
                parentViewController: self];
       [[self navigationController] pushViewController: sotc
                                              animated: YES];
-      [sotc release];
     }
     else if (row == 2) {
       // Sounds
@@ -306,7 +293,6 @@
                parentViewController: self];
       [[self navigationController] pushViewController: sotc
                                              animated: YES];
-      [sotc release];
     }
   }
   else if (section == 3) {
@@ -315,14 +301,12 @@
       EditUserNameController *eunc = [[EditUserNameController alloc]
                                        initWithParentViewController: self];
       [[self navigationController] pushViewController: eunc animated: YES];
-      [eunc release];
     }
   }
   else if (section == 4) {
     if (row == 0) {
       AboutController *ac = [[AboutController alloc] init];
       [[self navigationController] pushViewController: ac animated: YES];
-      [ac release];
     }
   }
 }
@@ -364,9 +348,6 @@
   [[self tableView] reloadData];
 }
 
-- (void)dealloc {
-  [super dealloc];
-}
 
 
 @end

@@ -26,7 +26,7 @@
 
 - (id)initWithFen:(NSString *)aFen {
   if (self = [super init]) {
-    fen = [aFen retain];
+    fen = aFen;
   }
   return self;
 }
@@ -40,16 +40,14 @@
   [self setTitle: @"Castle rights"];
   contentView = [[UIView alloc] initWithFrame: r];
   [self setView: contentView];
-  [contentView release];
   [contentView setBackgroundColor: [UIColor whiteColor]];
 
   [[self navigationItem]
-    setRightBarButtonItem: [[[UIBarButtonItem alloc]
+    setRightBarButtonItem: [[UIBarButtonItem alloc]
                               initWithTitle: @"Done"
                                       style: UIBarButtonItemStylePlain
                                      target: self
-                                     action: @selector(donePressed)]
-                             autorelease]];
+                                     action: @selector(donePressed)]];
   boardView = [[SetupBoardView alloc] initWithController: self
                                                      fen: fen
                                                    phase: PHASE_EDIT_CASTLES];
@@ -57,7 +55,6 @@
   r.origin = CGPointMake(0.0f, 48.0f);
   [boardView setFrame: r];
   [contentView addSubview: boardView];
-  [boardView release];
 
   UILabel *label;
   UISwitch *s;
@@ -67,7 +64,6 @@
     [[UILabel alloc] initWithFrame: CGRectMake(21.0f, 0.0f, 120.0f, 20.0f)];
   [label setText: @"Black O-O-O"];
   [contentView addSubview: label];
-  [label release];
 
   s = [[UISwitch alloc] initWithFrame: CGRectMake(0.0f,0.0f,0.0f,0.0f)];
   r = [s frame];
@@ -81,13 +77,11 @@
   }
   [contentView addSubview: s];
   bOOOswitch = s;
-  [s release];
 
   label =
     [[UILabel alloc] initWithFrame: CGRectMake(21.0f, 368.0f, 120.0f, 20.0f)];
   [label setText: @"White O-O-O"];
   [contentView addSubview: label];
-  [label release];
 
   s = [[UISwitch alloc] initWithFrame: CGRectMake(0.0f,0.0f,0.0f,0.0f)];
   r = [s frame];
@@ -101,13 +95,11 @@
   }
   [contentView addSubview: s];
   wOOOswitch = s;
-  [s release];
 
   label =
     [[UILabel alloc] initWithFrame: CGRectMake(211.0f, 0.0f, 120.0f, 20.0f)];
   [label setText: @"Black O-O"];
   [contentView addSubview: label];
-  [label release];
 
   s = [[UISwitch alloc] initWithFrame: CGRectMake(0.0f,0.0f,0.0f,0.0f)];
   r = [s frame];
@@ -121,13 +113,11 @@
   }
   [contentView addSubview: s];
   bOOswitch = s;
-  [s release];
 
   label =
     [[UILabel alloc] initWithFrame: CGRectMake(211.0f, 368.0f, 120.0f, 20.0f)];
   [label setText: @"White O-O"];
   [contentView addSubview: label];
-  [label release];
 
   s = [[UISwitch alloc] initWithFrame: CGRectMake(0.0f,0.0f,0.0f,0.0f)];
   r = [s frame];
@@ -141,7 +131,6 @@
   }
   [contentView addSubview: s];
   wOOswitch = s;
-  [s release];
 }
 
 
@@ -175,7 +164,6 @@
                          [substrs objectAtIndex: 1],
                                cstr]];
     [[self navigationController] pushViewController: epc animated: YES];
-    [epc release];
   }
   else {
     BoardViewController *bvc =
@@ -191,10 +179,6 @@
 }
 
 
-- (void)dealloc {
-  [fen release];
-  [super dealloc];
-}
 
 
 @end

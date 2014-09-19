@@ -40,7 +40,6 @@
     [[UIView alloc] initWithFrame: [[UIScreen mainScreen] applicationFrame]];
   [contentView setBackgroundColor: [UIColor lightGrayColor]];
   [self setView: contentView];
-  [contentView release];
 
   datePicker = [[UIDatePicker alloc] initWithFrame:
                                        CGRectMake(0.0f, 20.0f, 320.0f, 216.0f)];
@@ -48,7 +47,6 @@
   [datePicker addTarget: self action: @selector(dateChanged:)
        forControlEvents: UIControlEventValueChanged];
   [contentView addSubview: datePicker];
-  [datePicker release];
 }
 
 
@@ -59,7 +57,6 @@
   [[gameDetailsController game]
     setDate: [dateFormatter stringFromDate: [sender date]]];
   [gameDetailsController updateTableCells];
-  [dateFormatter release];
   NSLog(@"%@", [[gameDetailsController game] date]);
 }
 
@@ -84,9 +81,6 @@
 }
 
 
-- (void)dealloc {
-  [super dealloc];
-}
 
 
 @end

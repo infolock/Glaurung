@@ -35,10 +35,10 @@
                    phase:(SetupPhase)aPhase {
   if (self = [super initWithFrame: CGRectMake(0.0f, 0.0f, 320.0f, 320.0f)]) {
     controller = c;
-    startFen = [fen retain];
+    startFen = fen;
     phase = aPhase;
-    darkSquareColor = [[[Options sharedOptions] darkSquareColor] retain];
-    lightSquareColor = [[[Options sharedOptions] lightSquareColor] retain];
+    darkSquareColor = [[Options sharedOptions] darkSquareColor];
+    lightSquareColor = [[Options sharedOptions] lightSquareColor];
     pieceViews = [[NSMutableArray alloc] init];
 
     static NSString *pieceImageNames[16] = {
@@ -50,10 +50,9 @@
     for (Piece p = WP; p <= BK; p++) {
       if (piece_is_ok(p))
         pieceImages[p] =
-          [[UIImage imageNamed: [NSString stringWithFormat: @"%@%@.tiff",
+          [UIImage imageNamed: [NSString stringWithFormat: @"%@%@.tiff",
                                           pieceSet,
-                                          pieceImageNames[p]]]
-            retain];
+                                          pieceImageNames[p]]];
       else
         pieceImages[p] = nil;
     }
@@ -78,7 +77,6 @@
         [[HighlightedSquaresView alloc] initWithFrame: rect squares: epSquares];
       [highlightedSquaresView setOpaque: NO];
       [self addSubview: highlightedSquaresView];
-      [highlightedSquaresView release];
     }
     else highlightedSquaresView = nil;
   }
@@ -108,7 +106,6 @@
     [iv setImage: pieceImages[p]];
     [self addSubview: iv];
     [pieceViews addObject: iv];
-    [iv release];
   }
 }
 
@@ -181,7 +178,6 @@
     CGPoint pt = [[touches anyObject] locationInView: self];
     if (pt.x >= 320.0 || pt.x <= 0 || pt.y >= 320 || pt.y <= 0) {
       [selectedSquareView removeFromSuperview];
-      [selectedSquareView release];
       selectedSquare = SQ_NONE;
       return;
     }
@@ -242,7 +238,6 @@
       }
     }
     [selectedSquareView removeFromSuperview];
-    [selectedSquareView release];
 
     int whiteIsInCheck = [self whiteIsInCheck];
     int blackIsInCheck = [self blackIsInCheck];
@@ -257,7 +252,6 @@
   }
   else if (phase == PHASE_EDIT_EP) {
     [selectedSquareView removeFromSuperview];
-    [selectedSquareView release];
     [highlightedSquaresView setSelectedSquare: selectedSquare];
   }
 }
@@ -420,13 +414,8 @@
 
 
 - (void)dealloc {
-  [darkSquareColor release];
-  [lightSquareColor release];
-  [pieceViews release];
-  [startFen release];
   for (Piece p = WP; p <= BK; p++)
-    [pieceImages[p] release];
-  [super dealloc];
+    ;
 }
 
 

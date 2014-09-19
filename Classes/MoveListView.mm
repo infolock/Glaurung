@@ -98,9 +98,6 @@
 
 /// Clean up.
 
-- (void)dealloc {
-  [super dealloc];
-}
 
 
 @end

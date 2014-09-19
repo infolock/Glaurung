@@ -33,8 +33,6 @@
   [webView setScalesPageToFit: YES];
   [webView loadRequest: req];
   [self setView: webView];
-  [webView release];
-  [url release];
 }
 
 @end

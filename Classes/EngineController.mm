@@ -46,29 +46,29 @@ EngineController *GlobalEngineController; // HACK
 }
 
 - (void)startEngine:(id)anObject {
-  NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
+  @autoreleasepool {
 
-  engineThreadIsRunning = YES;
-  engineThreadShouldStop = NO;
+    engineThreadIsRunning = YES;
+    engineThreadShouldStop = NO;
 
-  engine_init();
+    engine_init();
 
-  while (!engineThreadShouldStop) {
-    pthread_mutex_lock(&WaitConditionLock);
-    if ([commandQueue isEmpty])
-      pthread_cond_wait(&WaitCondition, &WaitConditionLock);
-    pthread_mutex_unlock(&WaitConditionLock);
-    while (![commandQueue isEmpty]) {
-      NSString *command = [commandQueue pop];
-      if ([command hasPrefix: @"go"])
-        engineIsThinking = YES;
-      command_to_engine([command UTF8String]);
-      engineIsThinking = NO;
+    while (!engineThreadShouldStop) {
+      pthread_mutex_lock(&WaitConditionLock);
+      if ([commandQueue isEmpty])
+        pthread_cond_wait(&WaitCondition, &WaitConditionLock);
+      pthread_mutex_unlock(&WaitConditionLock);
+      while (![commandQueue isEmpty]) {
+        NSString *command = [commandQueue pop];
+        if ([command hasPrefix: @"go"])
+          engineIsThinking = YES;
+        command_to_engine([command UTF8String]);
+        engineIsThinking = NO;
+      }
     }
-  }
 
-  NSLog(@"engine is quitting");
-  [pool release];
+    NSLog(@"engine is quitting");
+  }
   engineThreadIsRunning = NO;
 }
 
@@ -136,10 +136,8 @@ EngineController *GlobalEngineController; // HACK
 
 - (void)dealloc {
   NSLog(@"EngineController dealloc");
-  [commandQueue release];
   pthread_cond_destroy(&WaitCondition);
   pthread_mutex_destroy(&WaitConditionLock);
-  [super dealloc];
 }
 
 

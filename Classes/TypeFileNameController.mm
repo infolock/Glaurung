@@ -25,12 +25,11 @@
 - (id)initWithSaveFileListController:(SaveFileListController *)sflc {
   if (self = [super init]) {
     saveFileListController = sflc;
-    UIBarButtonItem *button = [[[UIBarButtonItem alloc]
+    UIBarButtonItem *button = [[UIBarButtonItem alloc]
                                  initWithTitle: @"Done"
                                          style: UIBarButtonItemStylePlain
                                         target: self
-                                        action: @selector(doneButtonPressed:)]
-                                autorelease];
+                                        action: @selector(doneButtonPressed:)];
     [[self navigationItem] setRightBarButtonItem: button];
   }
   return self;
@@ -43,14 +42,12 @@
     [[UIView alloc] initWithFrame: [[UIScreen mainScreen] applicationFrame]];
   [contentView setBackgroundColor: [UIColor lightGrayColor]];
   [self setView: contentView];
-  [contentView release];
 
   UILabel *label = [[UILabel alloc]
                      initWithFrame: CGRectMake(10.0f, 20.0f, 80.0f, 28.0f)];
   [label setText: @"File name:"];
   [label setBackgroundColor: [UIColor lightGrayColor]];
   [contentView addSubview: label];
-  [label release];
 
   textField = [[UITextField alloc]
                 initWithFrame: CGRectMake(100.0f, 20.0f, 210.0f, 28.0f)];
@@ -59,7 +56,6 @@
   [textField setBackgroundColor: [UIColor whiteColor]];
   [textField setText: @""];
   [contentView addSubview: textField];
-  [textField release];
 }
 
 
@@ -82,9 +78,6 @@
 }
 
 
-- (void)dealloc {
-  [super dealloc];
-}
 
 
 @end

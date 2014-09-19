@@ -26,9 +26,8 @@
 - (id)initWithGameDetailsController:(GameDetailsTableController *)gdtc {
   if (self = [super init]) {
     gameDetailsController = gdtc;
-    contents = [[NSArray arrayWithObjects:
-                           @"1-0", @"0-1", @"1/2-1/2", @"*", nil]
-                 retain];
+    contents = [NSArray arrayWithObjects:
+                           @"1-0", @"0-1", @"1/2-1/2", @"*", nil];
   }
   return self;
 }
@@ -50,9 +49,8 @@
   UITableViewCell *cell =
     [[self tableView] dequeueReusableCellWithIdentifier: @"any-cell"];
   if (cell == nil) {
-    cell = [[[UITableViewCell alloc] initWithStyle: UITableViewCellStyleDefault
-                                   reuseIdentifier: @"any-cell"]
-             autorelease];
+    cell = [[UITableViewCell alloc] initWithStyle: UITableViewCellStyleDefault
+                                   reuseIdentifier: @"any-cell"];
   }
   [[cell textLabel] setText: [contents objectAtIndex: row]];
   if ([[[cell textLabel] text] isEqualToString: [[gameDetailsController game] result]]) {
@@ -86,10 +84,6 @@
 }
 
 
-- (void)dealloc {
-  [contents release];
-  [super dealloc];
-}
 
 
 @end

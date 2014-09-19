@@ -54,8 +54,6 @@
   contentView = [[UIView alloc] initWithFrame: appRect];
   [rootView addSubview: contentView];
   [self setView: rootView];
-  [rootView release];
-  [contentView release];
 
   // Board
   boardView =
@@ -69,7 +67,6 @@
   //[searchStatsView setTextAlignment: UITextAlignmentCenter];
   [searchStatsView setBackgroundColor: [UIColor lightGrayColor]];
   [contentView addSubview: searchStatsView];
-  [searchStatsView release];
 
   // Clocks
   whiteClockView =
@@ -119,39 +116,32 @@
                                            action: @selector(toolbarButtonPressed:)];
   [button setWidth: 58.0f];
   [buttons addObject: button];
-  [button release];
   button = [[UIBarButtonItem alloc] initWithTitle: @"Options"
                                             style: UIBarButtonItemStylePlain
                                            target: self
                                            action: @selector(toolbarButtonPressed:)];
   //[button setWidth: 60.0f];
   [buttons addObject: button];
-  [button release];
   button = [[UIBarButtonItem alloc] initWithTitle: @"Flip"
                                             style: UIBarButtonItemStylePlain
                                            target: self
                                            action: @selector(toolbarButtonPressed:)];
   [buttons addObject: button];
-  [button release];
   button = [[UIBarButtonItem alloc] initWithTitle: @"Move"
                                             style: UIBarButtonItemStylePlain
                                            target: self
                                            action: @selector(toolbarButtonPressed:)];
   [button setWidth: 53.0f];
   [buttons addObject: button];
-  [button release];
   button = [[UIBarButtonItem alloc] initWithTitle: @"Hint"
                                             style: UIBarButtonItemStylePlain
                                            target: self
                                            action: @selector(toolbarButtonPressed:)];
   [button setWidth: 49.0f];
   [buttons addObject: button];
-  [button release];
 
   [toolbar setItems: buttons animated: YES];
-  [buttons release];
   [toolbar sizeToFit];
-  [toolbar release];
 
   [contentView bringSubviewToFront: boardView];
 
@@ -163,7 +153,6 @@
     setActivityIndicatorViewStyle: UIActivityIndicatorViewStyleWhite];
   [contentView addSubview: activityIndicator];
   [activityIndicator startAnimating];
-  [activityIndicator release];
 }
 
 /*
@@ -187,15 +176,6 @@
 }
 
 
-- (void)dealloc {
-  [contentView release];
-  [analysisView release];
-  [boardView release];
-  [whiteClockView release];
-  [blackClockView release];
-  [moveListView release];
-  [super dealloc];
-}
 
 
 - (void)alertView:(UIAlertView *)alertView
@@ -240,7 +220,6 @@ clickedButtonAtIndex:(NSInteger)buttonIndex {
                                  @"Play white", @"Play black", @"Play both",
                                @"Analysis", nil];
       [menu showInView: contentView];
-      [menu release];
       break;
     case 1:
       [self showSaveGameMenu];
@@ -267,21 +246,21 @@ clickedButtonAtIndex:(NSInteger)buttonIndex {
     switch(buttonIndex) {
     case 0: // Take back
       if ([[Options sharedOptions] displayMoveGestureTakebackHint])
-        [[[[UIAlertView alloc] initWithTitle: @"Hint:"
+        [[[UIAlertView alloc] initWithTitle: @"Hint:"
                                      message: @"You can also take back moves by swiping your finger from right to left in the move list area below the board."
                                     delegate: self
                            cancelButtonTitle: nil
-                           otherButtonTitles: @"OK", nil] autorelease]
+                           otherButtonTitles: @"OK", nil]
           show];
       [gameController takeBackMove];
       break;
     case 1: // Step forward
       if ([[Options sharedOptions] displayMoveGestureStepForwardHint])
-        [[[[UIAlertView alloc] initWithTitle: @"Hint:"
+        [[[UIAlertView alloc] initWithTitle: @"Hint:"
                                      message: @"You can also step forward in the game by swiping your finger from left to right in the move list area below the board."
                                     delegate: self
                            cancelButtonTitle: nil
-                           otherButtonTitles: @"OK", nil] autorelease]
+                           otherButtonTitles: @"OK", nil]
           show];
       [gameController replayMove];
       break;
@@ -352,7 +331,6 @@ clickedButtonAtIndex:(NSInteger)buttonIndex {
         otherButtonTitles:
           @"New game", @"Save game", @"Load game", @"E-mail game", @"Edit position", @"Level/Game mode", nil];
     [menu showInView: contentView];
-    [menu release];
   }
   else if ([title isEqualToString: @"Options"])
     [self showOptionsMenu];
@@ -368,7 +346,6 @@ clickedButtonAtIndex:(NSInteger)buttonIndex {
 	otherButtonTitles:
 	  @"Take back", @"Step forward", @"Take back all", @"Step forward all", @"Move now", nil];
     [menu showInView: contentView];
-    [menu release];
   }
   else if ([title isEqualToString: @"Hint"])
     [gameController showHint];
@@ -385,7 +362,6 @@ clickedButtonAtIndex:(NSInteger)buttonIndex {
   navigationController =
     [[UINavigationController alloc]
       initWithRootViewController: ovc];
-  [ovc release];
   CGRect r = [[navigationController view] frame];
   // Why do I suddenly have to use -20.0f for the Y coordinate below?
   // 0.0f seems right, and used to work in SDK 2.x.
@@ -402,7 +378,6 @@ clickedButtonAtIndex:(NSInteger)buttonIndex {
     [gameController showBookMoves];
   [rootView flipSubviewsRight];
   [[navigationController view] removeFromSuperview];
-  [navigationController release];
 }
 
 
@@ -413,7 +388,6 @@ clickedButtonAtIndex:(NSInteger)buttonIndex {
   navigationController =
     [[UINavigationController alloc]
       initWithRootViewController: lvc];
-  [lvc release];
   CGRect r = [[navigationController view] frame];
   // Why do I suddenly have to use -20.0f for the Y coordinate below?
   // 0.0f seems right, and used to work in SDK 2.x.
@@ -433,7 +407,6 @@ clickedButtonAtIndex:(NSInteger)buttonIndex {
 
   [rootView flipSubviewsRight];
   [[navigationController view] removeFromSuperview];
-  [navigationController release];
 }
 
 
@@ -443,7 +416,6 @@ clickedButtonAtIndex:(NSInteger)buttonIndex {
                                                          fen: [[gameController game] currentFEN]];
   navigationController =
     [[UINavigationController alloc] initWithRootViewController: svc];
-  [svc release];
   CGRect r = [[navigationController view] frame];
   // Why do I suddenly have to use -20.0f for the Y coordinate below?
   // 0.0f seems right, and used to work in SDK 2.x.
@@ -458,7 +430,6 @@ clickedButtonAtIndex:(NSInteger)buttonIndex {
   NSLog(@"edit position cancel");
   [rootView flipSubviewsRight];
   [[navigationController view] removeFromSuperview];
-  [navigationController release];
 }
 
 
@@ -466,7 +437,6 @@ clickedButtonAtIndex:(NSInteger)buttonIndex {
   NSLog(@"edit position done: %@", fen);
   [rootView flipSubviewsRight];
   [[navigationController view] removeFromSuperview];
-  [navigationController release];
   [boardView hideLastMove];
   [gameController gameFromFEN: fen];
 }
@@ -480,7 +450,6 @@ clickedButtonAtIndex:(NSInteger)buttonIndex {
                             email: NO];
   navigationController =
     [[UINavigationController alloc] initWithRootViewController: gdtc];
-  [gdtc release];
   CGRect r = [[navigationController view] frame];
   // Why do I suddenly have to use -20.0f for the Y coordinate below?
   // 0.0f seems right, and used to work in SDK 2.x.
@@ -504,7 +473,6 @@ clickedButtonAtIndex:(NSInteger)buttonIndex {
   }
   [rootView flipSubviewsRight];
   [[navigationController view] removeFromSuperview];
-  [navigationController release];
   NSLog(@"save game done");
 }
 
@@ -513,7 +481,6 @@ clickedButtonAtIndex:(NSInteger)buttonIndex {
   NSLog(@"save game canceled");
   [rootView flipSubviewsRight];
   [[navigationController view] removeFromSuperview];
-  [navigationController release];
 }
 
 
@@ -522,7 +489,6 @@ clickedButtonAtIndex:(NSInteger)buttonIndex {
     [[LoadFileListController alloc] initWithBoardViewController: self];
   navigationController =
     [[UINavigationController alloc] initWithRootViewController: lflc];
-  [lflc release];
   CGRect r = [[navigationController view] frame];
   // Why do I suddenly have to use -20.0f for the Y coordinate below?
   // 0.0f seems right, and used to work in SDK 2.x.
@@ -537,7 +503,6 @@ clickedButtonAtIndex:(NSInteger)buttonIndex {
   NSLog(@"load game canceled");
   [rootView flipSubviewsRight];
   [[navigationController view] removeFromSuperview];
-  [navigationController release];
 }
 
 
@@ -545,7 +510,6 @@ clickedButtonAtIndex:(NSInteger)buttonIndex {
   NSLog(@"load menu done, gameString = %@", gameString);
   [rootView flipSubviewsRight];
   [[navigationController view] removeFromSuperview];
-  [navigationController release];
   [gameController gameFromPGNString: gameString];
   [boardView hideLastMove];
 }
@@ -559,7 +523,6 @@ clickedButtonAtIndex:(NSInteger)buttonIndex {
                             email: YES];
   navigationController =
     [[UINavigationController alloc] initWithRootViewController: gdtc];
-  [gdtc release];
   CGRect r = [[navigationController view] frame];
   // Why do I suddenly have to use -20.0f for the Y coordinate below?
   // 0.0f seems right, and used to work in SDK 2.x.
@@ -574,12 +537,11 @@ clickedButtonAtIndex:(NSInteger)buttonIndex {
   NSLog(@"email game done");
   [rootView flipSubviewsRight];
   [[navigationController view] removeFromSuperview];
-  [navigationController release];
-  [[[[UIAlertView alloc] initWithTitle: @"Exit Glaurung and send e-mail?"
+  [[[UIAlertView alloc] initWithTitle: @"Exit Glaurung and send e-mail?"
                                message: @""
                               delegate: self
                      cancelButtonTitle: @"Cancel"
-                     otherButtonTitles: @"OK", nil] autorelease]
+                     otherButtonTitles: @"OK", nil]
     show];
 }
 
@@ -588,7 +550,6 @@ clickedButtonAtIndex:(NSInteger)buttonIndex {
   NSLog(@"email game canceled");
   [rootView flipSubviewsRight];
   [[navigationController view] removeFromSuperview];
-  [navigationController release];
 }
 
 

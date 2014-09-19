@@ -21,8 +21,8 @@
 #import "GlaurungAppDelegate.h"
 
 int main(int argc, char *argv[]) {
-  NSAutoreleasePool * pool = [[NSAutoreleasePool alloc] init];
-  int retVal = UIApplicationMain(argc, argv, nil, @"GlaurungAppDelegate");
-  [pool release];
-  return retVal;
+  @autoreleasepool {
+    int retVal = UIApplicationMain(argc, argv, nil, @"GlaurungAppDelegate");
+    return retVal;
+  }
 }

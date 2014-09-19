@@ -31,10 +31,9 @@
     [self setTitle: @"Game files"];
     fileList =
       (NSMutableArray *)
-      [[[[NSFileManager defaultManager]
+      [[[NSFileManager defaultManager]
           contentsOfDirectoryAtPath: PGN_DIRECTORY error:nil]
-         pathsMatchingExtensions: [NSArray arrayWithObjects: @"pgn", nil]]
-        retain];
+         pathsMatchingExtensions: [NSArray arrayWithObjects: @"pgn", nil]];
   }
   return self;
 }
@@ -43,12 +42,11 @@
 - (void)loadView {
   [super loadView];
   [[self navigationItem]
-    setLeftBarButtonItem:[[[UIBarButtonItem alloc]
+    setLeftBarButtonItem:[[UIBarButtonItem alloc]
                             initWithTitle: @"Cancel"
                                     style: UIBarButtonItemStylePlain
                                    target: boardViewController
-                                   action: @selector(loadMenuCancelPressed)]
-                           autorelease]];
+                                   action: @selector(loadMenuCancelPressed)]];
 }
 
 
@@ -70,9 +68,8 @@
   UITableViewCell *cell =
     [[self tableView] dequeueReusableCellWithIdentifier: @"any-cell"];
   if (cell == nil) {
-    cell = [[[UITableViewCell alloc] initWithStyle: UITableViewCellStyleDefault
-                                   reuseIdentifier: @"any-cell"]
-             autorelease];
+    cell = [[UITableViewCell alloc] initWithStyle: UITableViewCellStyleDefault
+                                   reuseIdentifier: @"any-cell"];
   }
   [[cell textLabel] setText: [fileList objectAtIndex: row]];
   [cell setAccessoryType: UITableViewCellAccessoryDisclosureIndicator];
@@ -89,7 +86,6 @@
                               initWithLoadFileListController: self
                                                     filename: [fileList objectAtIndex: row]];
   [[self navigationController] pushViewController: glc animated: YES];
-  [glc release];
   [self performSelector: @selector(deselect:) withObject: tableView
              afterDelay: 0.1f];
 }
@@ -148,21 +144,15 @@ else if (editingStyle == UITableViewCellEditingStyleInsert) {
 
 
 - (void)updateTableCells {
-  [fileList release];
   fileList =
     (NSMutableArray *)
-    [[[[NSFileManager defaultManager]
+    [[[NSFileManager defaultManager]
        contentsOfDirectoryAtPath: PGN_DIRECTORY error:nil]
-       pathsMatchingExtensions: [NSArray arrayWithObjects: @"pgn", nil]]
-      retain];
+       pathsMatchingExtensions: [NSArray arrayWithObjects: @"pgn", nil]];
   [[self tableView] reloadData];
 }
 
 
-- (void)dealloc {
-  [fileList release];
-  [super dealloc];
-}
 
 
 @end

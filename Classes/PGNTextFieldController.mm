@@ -57,7 +57,6 @@
     [[UIView alloc] initWithFrame: [[UIScreen mainScreen] applicationFrame]];
   [contentView setBackgroundColor: [UIColor lightGrayColor]];
   [self setView: contentView];
-  [contentView release];
 
   textField = [[UITextField alloc]
                 initWithFrame: CGRectMake(20.0f, 20.0f, 280.0f, 28.0f)];
@@ -67,7 +66,6 @@
   [textField setClearButtonMode: UITextFieldViewModeAlways];
   [textField setBackgroundColor: [UIColor whiteColor]];
   [contentView addSubview: textField];
-  [textField release];
 }
 
 
@@ -92,7 +90,6 @@
 
 - (void)dealloc {
   [[NSNotificationCenter defaultCenter] removeObserver: self];
-  [super dealloc];
 }
 
 

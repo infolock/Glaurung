@@ -32,7 +32,7 @@
   UILabel *whiteClockView, *blackClockView;
   UILabel *searchStatsView;
   MoveListView *moveListView;
-  GameController *gameController;
+  GameController *__weak gameController;
   UINavigationController *navigationController;
   UIActivityIndicatorView *activityIndicator;
 }
@@ -43,7 +43,7 @@
 @property (nonatomic, readonly) UILabel *blackClockView;
 @property (nonatomic, readonly) MoveListView *moveListView;
 @property (nonatomic, readonly) UILabel *searchStatsView;
-@property (nonatomic, assign) GameController *gameController;
+@property (nonatomic, weak) GameController *gameController;
 
 - (void)toolbarButtonPressed:(id)sender;
 - (void)showOptionsMenu;

@@ -70,7 +70,7 @@ static void raisePGNException(NSString *exceptionreason);
 
   gameIndicesSize = 1024;
   gameIndices = (int *)malloc(gameIndicesSize * sizeof(int));
-  filename = [aFilename retain];
+  filename = aFilename;
   file =
     fopen([[PGN_DIRECTORY stringByAppendingPathComponent: filename]
             UTF8String], "r");
@@ -189,7 +189,7 @@ static void raisePGNException(NSString *exceptionreason);
 -(BOOL)nextMove:(NSString **)string {
   char cstring[256];
   if ([self nextMoveIntoCString: cstring withSize: 256]) {
-    *string = [[NSString stringWithUTF8String: cstring] retain];
+    *string = [NSString stringWithUTF8String: cstring];
     return YES;
   }
   return NO;
@@ -581,7 +581,6 @@ static void raisePGNException(NSString *exceptionreason) {
     current++;
   }
   str = [NSString stringWithString: mstr];
-  [mstr release];
   return str;
 }
 
@@ -594,7 +593,6 @@ static void raisePGNException(NSString *exceptionreason) {
     [mstring appendString: [NSString stringWithUTF8String: cstr]];
   }
   string = [NSString stringWithString: mstring];
-  [mstring release];
   return string;
 }
 
@@ -604,8 +602,6 @@ static void raisePGNException(NSString *exceptionreason) {
 
 -(void)dealloc {
   free(gameIndices);
-  [filename release];
-  [super dealloc];
 }
 
 @end

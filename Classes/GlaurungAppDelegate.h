@@ -27,7 +27,7 @@
   GameController *gameController;
 }
 
-@property (nonatomic, retain) UIWindow *window;
+@property (nonatomic, strong) UIWindow *window;
 @property (nonatomic, readonly) BoardViewController *viewController;
 @property (nonatomic, readonly) GameController *gameController;
 

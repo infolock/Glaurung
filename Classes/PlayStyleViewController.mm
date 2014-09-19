@@ -40,9 +40,8 @@
   UITableViewCell *cell =
     [[self tableView] dequeueReusableCellWithIdentifier: @"any-cell"];
   if (cell == nil)
-    cell = [[[UITableViewCell alloc] initWithStyle: UITableViewCellStyleDefault
-                                   reuseIdentifier: @"any-cell"]
-             autorelease];
+    cell = [[UITableViewCell alloc] initWithStyle: UITableViewCellStyleDefault
+                                   reuseIdentifier: @"any-cell"];
 
   if (row == 0) {
     [[cell textLabel] setText: @"Solid"];
@@ -71,9 +70,6 @@
 }
 
 
-- (void)dealloc {
-  [super dealloc];
-}
 
 
 @end

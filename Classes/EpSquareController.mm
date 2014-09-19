@@ -27,7 +27,7 @@
 
 - (id)initWithFen:(NSString *)aFen {
   if (self = [super init]) {
-    fen = [aFen retain];
+    fen = aFen;
   }
   return self;
 }
@@ -40,16 +40,14 @@
   [self setTitle: @"E.p. square"];
   contentView = [[UIView alloc] initWithFrame: r];
   [self setView: contentView];
-  [contentView release];
   [contentView setBackgroundColor: [UIColor whiteColor]];
 
   [[self navigationItem]
-    setRightBarButtonItem: [[[UIBarButtonItem alloc]
+    setRightBarButtonItem: [[UIBarButtonItem alloc]
                               initWithTitle: @"Done"
                                       style: UIBarButtonItemStylePlain
                                      target: self
-                                     action: @selector(donePressed)]
-                             autorelease]];
+                                     action: @selector(donePressed)]];
   boardView = [[SetupBoardView alloc] initWithController: self
                                                      fen: fen
                                                    phase: PHASE_EDIT_EP];
@@ -57,7 +55,6 @@
   r.origin = CGPointMake(0.0f, 0.0f);
   [boardView setFrame: r];
   [contentView addSubview: boardView];
-  [boardView release];
 
   UITextView *textView =
     [[UITextView alloc] initWithFrame: CGRectMake(0.0f, 320.0f, 320.0f, 80.0f)];
@@ -65,7 +62,6 @@
   [textView setText: @"Select a square for en passant captures from the squares highlighted above, and press \"Done\" when finished. If no en passant capture is possible, just press \"Done\" without selecting a square."];
   [textView setEditable: NO];
   [contentView addSubview: textView];
-  [textView release];
 }
 
 
@@ -85,10 +81,6 @@
 }
 
 
-- (void)dealloc {
-  [fen release];
-  [super dealloc];
-}
 
 
 @end

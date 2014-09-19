@@ -32,7 +32,7 @@
   if (self = [super init]) {
     [self setTitle: @"Board"];
     boardViewController = bvc;
-    fen = [aFen retain];
+    fen = aFen;
   }
   return self;
 }
@@ -57,14 +57,12 @@
            action: @selector(buttonPressed:)
         forControlEvents: UIControlEventValueChanged];
   [[self navigationItem] setTitleView: menu];
-  [menu release];
 
   // Selected piece view
   SelectedPieceView *spv =
     [[SelectedPieceView alloc] initWithFrame:
 				 CGRectMake(40.0f, 330.0f, 240.0f, 80.0f)];
   [contentView addSubview: spv];
-  [spv release];
 
   // Setup board view
   boardView = [[SetupBoardView alloc] initWithController: self
@@ -72,9 +70,7 @@
                                                    phase: PHASE_EDIT_BOARD];
   [contentView addSubview: boardView];
   [boardView setSelectedPieceView: spv];
-  [boardView release];
 
-  [contentView release];
 }
 
 
@@ -96,7 +92,6 @@
     SideToMoveController *stmc = [[SideToMoveController alloc]
                                    initWithFen: [boardView fen]];
     [[self navigationController] pushViewController: stmc animated: YES];
-    [stmc release];
     break;
   }
 }
@@ -112,10 +107,6 @@
 }
 
 
-- (void)dealloc {
-  [fen release];
-  [super dealloc];
-}
 
 
 @end

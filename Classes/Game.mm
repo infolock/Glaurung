@@ -35,7 +35,7 @@
 - (id)initWithGameController:(GameController *)gc FEN:(NSString *)fen {
   if (self = [super init]) {
     gameController = gc;
-    startFEN = [fen retain];
+    startFEN = fen;
     currentPosition = new Position;
     startPosition = new Position;
     startPosition->from_fen([fen UTF8String]);
@@ -46,26 +46,24 @@
 
     if (currentPosition->side_to_move() == WHITE) {
       whitePlayer = [[[Options sharedOptions] fullUserName] copy];
-      blackPlayer = [[NSString alloc] initWithString: ENGINE_NAME];
+      blackPlayer = ENGINE_NAME;
     }
     else {
-      whitePlayer = [[NSString alloc] initWithString: ENGINE_NAME];
+      whitePlayer = ENGINE_NAME;
       blackPlayer = [[[Options sharedOptions] fullUserName] copy];
     }
-    event = [[NSString alloc] initWithString: @"?"];
+    event = @"?";
     // TODO: Decide site by using GPS?
-    site = [[NSString alloc] initWithString: @"?"];
+    site = @"?";
 
     // TODO: Correct date format.
     NSDate *today = [[NSDate alloc] init];
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setDateStyle: NSDateFormatterMediumStyle];
-    date = [[dateFormatter stringFromDate: today] retain];
-    [today release];
-    [dateFormatter release];
+    date = [dateFormatter stringFromDate: today];
 
-    round = [[NSString alloc] initWithString: @"?"];
-    result = [[NSString alloc] initWithString: @"*"];
+    round = @"?";
+    result = @"*";
 
     book = [[OpeningBook alloc] init];
     clock = [[ChessClock alloc] initWithTime: 300000 increment: 0
@@ -78,7 +76,7 @@
 
 
 - (id)initWithGameController:(GameController *)gc PGNString:(NSString *)string {
-  [self initWithGameController: gc];
+  if (!(self = [self initWithGameController: gc])) return nil;
 
   GameParser *gp = [[GameParser alloc] initWithString: string];
   PGNToken token[1];
@@ -132,8 +130,7 @@
     } else if (strcmp(name, "Result") == 0) {
       [self setResult: [NSString stringWithUTF8String: value]];
     } else if (strncmp(name, "FEN", 3) == 0) {
-      [startFEN release];
-      startFEN = [[NSString stringWithUTF8String: value] retain];
+      startFEN = [NSString stringWithUTF8String: value];
       startPosition->from_fen([startFEN UTF8String]);
       currentPosition->copy(*startPosition);
     }
@@ -160,7 +157,6 @@
         currentPosition->do_move(m, u);
         ChessMove *cm = [[ChessMove alloc] initWithMove: m undoInfo: u];
         [moves addObject: cm];
-        [cm release];
         currentMoveIndex++;
       }
       else {
@@ -176,7 +172,6 @@
     }
   } while ([gp getNextToken: token]);
 
-  [gp release];
 
   return self;
 }
@@ -290,7 +285,6 @@
              NSMakeRange(currentMoveIndex, [moves count] - currentMoveIndex)];
   }
   [moves addObject: cm];
-  [cm release];
   currentMoveIndex++;
 
   [self pushClock];
@@ -333,7 +327,6 @@
              NSMakeRange(currentMoveIndex, [moves count] - currentMoveIndex)];
   }
   [moves addObject: cm];
-  [cm release];
   currentMoveIndex++;
 
   [self pushClock];
@@ -476,7 +469,6 @@ static NSString* breakLinesInString(NSString *string) {
     [scanner scanCharactersFromSet: charSet intoString: &str];
     [array addObject: str];
   }
-  [scanner release];
 
   // Build new string:
   mstr = [NSMutableString stringWithString: @""];
@@ -498,7 +490,6 @@ static NSString* breakLinesInString(NSString *string) {
       [mstr appendString: [array objectAtIndex: i]];
   }
 
-    [array release];
     return [NSString stringWithString: mstr];
 }
 
@@ -766,20 +757,8 @@ static NSString* breakLinesInString(NSString *string) {
   delete startPosition;
   delete currentPosition;
 
-  [startFEN release];
-  [moves release];
-  [book release];
   [clock stopTimer];
-  [clock release];
-  [event release];
-  [site release];
-  [date release];
-  [round release];
-  [whitePlayer release];
-  [blackPlayer release];
-  [result release];
 
-  [super dealloc];
 }
 
 @end

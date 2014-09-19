@@ -66,25 +66,25 @@
 
     pieceSet = [defaults objectForKey: @"pieceSet2"];
     if (!pieceSet) {
-      pieceSet = [@"Alpha" retain];
+      pieceSet = @"Alpha";
       [defaults setObject: @"Alpha" forKey: @"pieceSet2"];
     }
 
     playStyle = [defaults objectForKey: @"playStyle2"];
     if (!playStyle) {
-      playStyle = [@"Active" retain];
+      playStyle = @"Active";
       [defaults setObject: @"Active" forKey: @"playStyle2"];
     }
 
     bookVariety = [defaults objectForKey: @"bookVariety2"];
     if (!bookVariety) {
-      bookVariety = [@"Medium" retain];
+      bookVariety = @"Medium";
       [defaults setObject: @"Medium" forKey: @"bookVariety2"];
     }
 
     soundVolume = [defaults objectForKey: @"soundVolume2"];
     if (!soundVolume) {
-      soundVolume = [@"Soft" retain];
+      soundVolume = @"Soft";
       [defaults setObject: @"Soft" forKey: @"soundVolume2"];
     }
 
@@ -97,7 +97,7 @@
 
     colorScheme = [defaults objectForKey: @"colorScheme2"];
     if (!colorScheme) {
-      colorScheme = [@"Marble" retain];
+      colorScheme = @"Marble";
       [defaults setObject: @"Marble" forKey: @"colorScheme2"];
     }
     darkSquareColor = lightSquareColor = highlightColor = nil;
@@ -112,18 +112,18 @@
 
     saveGameFile = [defaults objectForKey: @"saveGameFile2"];
     if (!saveGameFile) {
-      saveGameFile = [@"My games.pgn" retain];
+      saveGameFile = @"My games.pgn";
       [defaults setObject: @"My Games.pgn" forKey: @"saveGameFile2"];
     }
 
     emailAddress = [defaults objectForKey: @"emailAddress2"];
     if (!emailAddress) {
-      emailAddress = [@"" retain];
+      emailAddress = @"";
       [defaults setObject: @"" forKey: @"emailAddress2"];
     }
     fullUserName = [defaults objectForKey: @"fullUserName2"];
     if (!fullUserName) {
-      fullUserName = [@"Me" retain];
+      fullUserName = @"Me";
       [defaults setObject: @"Me" forKey: @"fullUserName2"];
     }
 
@@ -157,7 +157,7 @@
 
     serverName = [defaults objectForKey: @"serverName2"];
     if (!serverName) {
-      serverName = [@"" retain];
+      serverName = @"";
       [defaults setObject: @"" forKey: @"serverName2"];
     }
 
@@ -174,79 +174,62 @@
 
 
 - (void)updateColors {
-  [darkSquareColor release];
-  [lightSquareColor release];
-  [highlightColor release];
-  [darkSquareImage release]; darkSquareImage = nil;
-  [lightSquareImage release]; lightSquareImage = nil;
+   darkSquareImage = nil;
+   lightSquareImage = nil;
   if ([colorScheme isEqualToString: @"Blue"]) {
-    darkSquareColor = [[UIColor colorWithRed: 0.20 green: 0.40 blue: 0.70
-                                       alpha: 1.0]
-                        retain];
-    lightSquareColor = [[UIColor colorWithRed: 0.69 green: 0.78 blue: 1.0
-                                        alpha: 1.0]
-                         retain];
-    highlightColor = [[UIColor brownColor] retain];
+    darkSquareColor = [UIColor colorWithRed: 0.20 green: 0.40 blue: 0.70
+                                       alpha: 1.0];
+    lightSquareColor = [UIColor colorWithRed: 0.69 green: 0.78 blue: 1.0
+                                        alpha: 1.0];
+    highlightColor = [UIColor brownColor];
   }
   else if ([colorScheme isEqualToString: @"Gray"]) {
-    darkSquareColor = [[UIColor colorWithRed: 0.5 green: 0.5 blue: 0.5
-                                       alpha: 1.0]
-                        retain];
-    lightSquareColor = [[UIColor colorWithRed: 0.8 green: 0.8 blue: 0.8
-                                        alpha: 1.0]
-                         retain];
-    highlightColor = [[UIColor blueColor] retain];
+    darkSquareColor = [UIColor colorWithRed: 0.5 green: 0.5 blue: 0.5
+                                       alpha: 1.0];
+    lightSquareColor = [UIColor colorWithRed: 0.8 green: 0.8 blue: 0.8
+                                        alpha: 1.0];
+    highlightColor = [UIColor blueColor];
   }
   else if ([colorScheme isEqualToString: @"Green"]) {
-    darkSquareColor = [[UIColor colorWithRed: 0.28 green: 0.6 blue: 0.28
-                                       alpha: 1.0]
-                        retain];
-    lightSquareColor = [[UIColor colorWithRed: 0.7 green: 1.0 blue: 0.7
-                                        alpha: 1.0]
-                         retain];
-    highlightColor = [[UIColor blueColor] retain];
+    darkSquareColor = [UIColor colorWithRed: 0.28 green: 0.6 blue: 0.28
+                                       alpha: 1.0];
+    lightSquareColor = [UIColor colorWithRed: 0.7 green: 1.0 blue: 0.7
+                                        alpha: 1.0];
+    highlightColor = [UIColor blueColor];
   }
   else if ([colorScheme isEqualToString: @"Red"]) {
-    darkSquareColor = [[UIColor colorWithRed: 0.6 green: 0.28 blue: 0.28
-                                       alpha: 1.0]
-                        retain];
-    lightSquareColor = [[UIColor colorWithRed: 1.0 green: 0.8 blue: 0.8
-                                        alpha: 1.0]
-                         retain];
-    highlightColor = [[UIColor blueColor] retain];
+    darkSquareColor = [UIColor colorWithRed: 0.6 green: 0.28 blue: 0.28
+                                       alpha: 1.0];
+    lightSquareColor = [UIColor colorWithRed: 1.0 green: 0.8 blue: 0.8
+                                        alpha: 1.0];
+    highlightColor = [UIColor blueColor];
   }
   else if ([colorScheme isEqualToString: @"Wood"]) {
-    darkSquareColor = [[UIColor colorWithRed: 0.57 green: 0.40 blue: 0.35
-                                       alpha: 1.0]
-                        retain];
-    lightSquareColor = [[UIColor colorWithRed: 0.9 green: 0.8 blue: 0.7
-                                        alpha: 1.0]
-                         retain];
-    darkSquareImage = [[UIImage imageNamed: @"DarkWood.tiff"] retain];
-    lightSquareImage = [[UIImage imageNamed: @"LightWood.tiff"] retain];
-    highlightColor = [[UIColor blueColor] retain];
+    darkSquareColor = [UIColor colorWithRed: 0.57 green: 0.40 blue: 0.35
+                                       alpha: 1.0];
+    lightSquareColor = [UIColor colorWithRed: 0.9 green: 0.8 blue: 0.7
+                                        alpha: 1.0];
+    darkSquareImage = [UIImage imageNamed: @"DarkWood.tiff"];
+    lightSquareImage = [UIImage imageNamed: @"LightWood.tiff"];
+    highlightColor = [UIColor blueColor];
   }
   else if ([colorScheme isEqualToString: @"Marble"]) {
-    darkSquareColor = [[UIColor colorWithRed: 0.57 green: 0.40 blue: 0.35
-                                       alpha: 1.0]
-                        retain];
-    lightSquareColor = [[UIColor colorWithRed: 0.9 green: 0.8 blue: 0.7
-                                        alpha: 1.0]
-                         retain];
+    darkSquareColor = [UIColor colorWithRed: 0.57 green: 0.40 blue: 0.35
+                                       alpha: 1.0];
+    lightSquareColor = [UIColor colorWithRed: 0.9 green: 0.8 blue: 0.7
+                                        alpha: 1.0];
     NSLog(@"reading dark square image");
-    darkSquareImage = [[UIImage imageNamed: @"DarkMarble.tiff"] retain];
+    darkSquareImage = [UIImage imageNamed: @"DarkMarble.tiff"];
     NSLog(@"reading light square image");
-    lightSquareImage = [[UIImage imageNamed: @"LightMarble.tiff"] retain];
-    highlightColor = [[UIColor blueColor] retain];
+    lightSquareImage = [UIImage imageNamed: @"LightMarble.tiff"];
+    highlightColor = [UIColor blueColor];
   }  
   else { // Default brown color scheme
-    darkSquareColor = [[UIColor colorWithRed: 0.57 green: 0.40 blue: 0.35
-                                       alpha: 1.0]
-                        retain];
-    lightSquareColor = [[UIColor colorWithRed: 0.9 green: 0.8 blue: 0.7
-                                        alpha: 1.0]
-                         retain];
-    highlightColor = [[UIColor blueColor] retain];
+    darkSquareColor = [UIColor colorWithRed: 0.57 green: 0.40 blue: 0.35
+                                       alpha: 1.0];
+    lightSquareColor = [UIColor colorWithRed: 0.9 green: 0.8 blue: 0.7
+                                        alpha: 1.0];
+    highlightColor = [UIColor blueColor];
   }
   // Post a notification about the new colors, in order to make the board
   // update itself:
@@ -262,8 +245,7 @@
 
 
 - (void)setColorScheme:(NSString *)newColorScheme {
-  [colorScheme release];
-  colorScheme = [newColorScheme retain];
+  colorScheme = newColorScheme;
   [[NSUserDefaults standardUserDefaults] setObject: newColorScheme
                                             forKey: @"colorScheme2"];
   [[NSUserDefaults standardUserDefaults] synchronize];
@@ -293,8 +275,7 @@
 
 
 - (void)setPieceSet:(NSString *)newPieceSet {
-  [pieceSet release];
-  pieceSet = [newPieceSet retain];
+  pieceSet = newPieceSet;
   [[NSUserDefaults standardUserDefaults] setObject: newPieceSet
                                             forKey: @"pieceSet2"];
   [[NSUserDefaults standardUserDefaults] synchronize];
@@ -310,8 +291,7 @@
 
 
 - (void)setPlayStyle:(NSString *)newPlayStyle {
-  [playStyle release];
-  playStyle = [newPlayStyle retain];
+  playStyle = newPlayStyle;
   playStyleWasChanged = YES;
   [[NSUserDefaults standardUserDefaults] setObject: newPlayStyle
                                             forKey: @"playStyle2"];
@@ -332,8 +312,7 @@
 
 
 - (void)setBookVariety:(NSString *)newBookVariety {
-  [bookVariety release];
-  bookVariety = [newBookVariety retain];
+  bookVariety = newBookVariety;
   bookVarietyWasChanged = YES;
   [[NSUserDefaults standardUserDefaults] setObject: newBookVariety
                                             forKey: @"bookVariety2"];
@@ -354,8 +333,7 @@
 
 
 - (void)setSoundVolume:(NSString *)newSoundVolume {
-  [soundVolume release];
-  soundVolume = [newSoundVolume retain];
+  soundVolume = newSoundVolume;
   [[NSUserDefaults standardUserDefaults] setObject: newSoundVolume
                                             forKey: @"soundVolume2"];
   [[NSUserDefaults standardUserDefaults] synchronize];
@@ -414,22 +392,6 @@
 }
 
 
-- (void)dealloc {
-  //[darkSquareColor release];
-  //[lightSquareColor release];
-  //[highlightColor release];
-  [darkSquareImage release];
-  [lightSquareImage release];
-  [colorScheme release];
-  [playStyle release];
-  [bookVariety release];
-  [pieceSet release];
-  [soundVolume release];
-  [saveGameFile release];
-  [emailAddress release];
-  [fullUserName release];
-  [super dealloc];
-}
 
 
 + (Options *)sharedOptions {
@@ -482,8 +444,7 @@
 
 
 - (void)setSaveGameFile:(NSString *)newFileName {
-  [saveGameFile release];
-  saveGameFile = [newFileName retain];
+  saveGameFile = newFileName;
   [[NSUserDefaults standardUserDefaults] setObject: saveGameFile
                                             forKey: @"saveGameFile2"];
   [[NSUserDefaults standardUserDefaults] synchronize];
@@ -496,8 +457,7 @@
 
 
 - (void)setEmailAddress:(NSString *)newEmailAddress {
-  [emailAddress release];
-  emailAddress = [newEmailAddress retain];
+  emailAddress = newEmailAddress;
   [[NSUserDefaults standardUserDefaults] setObject: emailAddress
                                             forKey: @"emailAddress2"];
   [[NSUserDefaults standardUserDefaults] synchronize];
@@ -510,8 +470,7 @@
 
 
 - (void)setFullUserName:(NSString *)name {
-  [fullUserName release];
-  fullUserName = [name retain];
+  fullUserName = name;
   [[NSUserDefaults standardUserDefaults] setObject: fullUserName
                                             forKey: @"fullUserName2"];
   [[NSUserDefaults standardUserDefaults] synchronize];
@@ -589,8 +548,7 @@ static const int LevelIncr[13] = {
 }
 
 - (void)setServerName:(NSString *)newServerName {
-  [serverName release];
-  serverName = [newServerName retain];
+  serverName = newServerName;
   [[NSUserDefaults standardUserDefaults] setObject: serverName
                                             forKey: @"serverName2"];
   [[NSUserDefaults standardUserDefaults] synchronize];

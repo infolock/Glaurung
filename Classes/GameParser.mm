@@ -40,7 +40,7 @@ static BOOL is_symbol_next(int c);
 
 -(id)initWithString:(NSString *)string {
   self = [super init];
-  gameString = [string retain];
+  gameString = string;
   gameCString = (char *)malloc([gameString length] * sizeof(char));
   strcpy(gameCString, [gameString UTF8String]);
   currentCharIndex = 0;
@@ -317,8 +317,6 @@ static BOOL is_symbol_next(int c);
 
 -(void)dealloc {
   free(gameCString);
-  [gameString release];
-  [super dealloc];
 }
 
 static BOOL is_symbol_start(int c) {

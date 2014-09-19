@@ -42,7 +42,6 @@
   contentView = [[UIView alloc] initWithFrame: r];
   [contentView setBackgroundColor: [UIColor whiteColor]];
   [self setView: contentView];
-  [contentView release];
 
   UIPickerView *picker = [[UIPickerView alloc]
                            initWithFrame: CGRectMake(0.0f, 0.0f, 0.0f, 0.0f)];
@@ -53,7 +52,6 @@
         inComponent: 0
            animated: NO];
   [contentView addSubview: picker];
-  [picker release];
 }
 
 
@@ -89,9 +87,6 @@ numberOfRowsInComponent:(NSInteger)component {
 }
 
 
-- (void)dealloc {
-  [super dealloc];
-}
 
 
 @end

@@ -26,7 +26,7 @@
                                 fieldName:(NSString *)fname {
   if (self = [super init]) {
     retc = r;
-    fieldName = [fname retain];
+    fieldName = fname;
 
     [[NSNotificationCenter defaultCenter]
       addObserver: self
@@ -46,7 +46,6 @@
     [[UIView alloc] initWithFrame: [[UIScreen mainScreen] applicationFrame]];
   [contentView setBackgroundColor: [UIColor lightGrayColor]];
   [self setView: contentView];
-  [contentView release];
 
   textField = [[UITextField alloc]
                 initWithFrame: CGRectMake(20.0f, 20.0f, 280.0f, 28.0f)];
@@ -73,7 +72,6 @@
   [textField setAutocorrectionType: UITextAutocorrectionTypeNo];
   [textField setBackgroundColor: [UIColor whiteColor]];
   [contentView addSubview: textField];
-  [textField release];
 }
 
 
@@ -100,8 +98,6 @@
 
 - (void)dealloc {
   [[NSNotificationCenter defaultCenter] removeObserver: self];
-  [fieldName release];
-  [super dealloc];
 }
 
 

@@ -36,14 +36,12 @@
                              target: self
                              action: @selector(newFile:)];
     [[self navigationItem] setRightBarButtonItem: button];
-    [button release];
 
     fileList =
       (NSMutableArray *)
-      [[[[NSFileManager defaultManager]
+      [[[NSFileManager defaultManager]
          contentsOfDirectoryAtPath: PGN_DIRECTORY error:nil]
-         pathsMatchingExtensions: [NSArray arrayWithObjects: @"pgn", nil]]
-        retain];
+         pathsMatchingExtensions: [NSArray arrayWithObjects: @"pgn", nil]];
   }
   return self;
 }
@@ -75,9 +73,8 @@
   UITableViewCell *cell =
     [[self tableView] dequeueReusableCellWithIdentifier: @"any-cell"];
   if (cell == nil) {
-    cell = [[[UITableViewCell alloc] initWithStyle: UITableViewCellStyleDefault
-                                   reuseIdentifier: @"any-cell"]
-             autorelease];
+    cell = [[UITableViewCell alloc] initWithStyle: UITableViewCellStyleDefault
+                                   reuseIdentifier: @"any-cell"];
   }
 
   [[cell textLabel] setText: [fileList objectAtIndex: row]];
@@ -149,7 +146,6 @@ else if (editingStyle == UITableViewCellEditingStyleInsert) {
   TypeFileNameController *tfnc = [[TypeFileNameController alloc]
                                    initWithSaveFileListController: self];
   [[self navigationController] pushViewController: tfnc animated: YES];
-  [tfnc release];
 }
 
 
@@ -183,10 +179,6 @@ else if (editingStyle == UITableViewCellEditingStyleInsert) {
 }
 
 
-- (void)dealloc {
-  [fileList release];
-  [super dealloc];
-}
 
 
 @end

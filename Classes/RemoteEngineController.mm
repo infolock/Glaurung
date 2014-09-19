@@ -45,10 +45,10 @@
 
   readStream = NULL, writeStream = NULL;
   CFStreamCreatePairWithSocketToHost(NULL,
-                                     (CFStringRef) hostName, port,
+                                     (__bridge CFStringRef) hostName, port,
                                      &readStream, &writeStream);
-  *istreamptr  = [NSMakeCollectable(readStream) autorelease];
-  *ostreamptr = [NSMakeCollectable(writeStream) autorelease];
+  *istreamptr  = CFBridgingRelease(readStream);
+  *ostreamptr = CFBridgingRelease(writeStream);
 }
 @end
 
@@ -69,36 +69,53 @@ static bool SuccessAlertIsDisplayed = NO;
 }
 
 
-- (void)connectToServer:(NSString *)serverName port:(int)portNumber {
-  NSURL *site = [NSURL URLWithString: serverName];
-  if (!site) {
-    NSLog(@"Error 1");
-    return;
-  }
-  NSLog(@"host name: %@", [site host]);
-  [NSStream getStreamsToHostWithName: serverName
-                                port: portNumber
-                         inputStream: &istream
-                        outputStream: &ostream];
+-(void)connectToServer:(NSString *)serverName port:(int)portNumber {
+// COMMENTING THIS OUT UNTIL WE CAN COME UP WITH A BETTER SOLUTION....
 
-  if (istream == nil)
-    NSLog(@"Error 2");
-
-  [istream retain];
-  [istream setDelegate: self];
-  [istream scheduleInRunLoop: [NSRunLoop currentRunLoop]
-                     forMode: NSDefaultRunLoopMode];
-  [istream open];
-
-  [ostream retain];
-  [ostream setDelegate: self];
-  [ostream scheduleInRunLoop: [NSRunLoop currentRunLoop]
-                     forMode: NSDefaultRunLoopMode];
-  [ostream open];
-
-  if (ostream == nil)
-    NSLog(@"Error 3");
-
+    NSLog( @"connectToServer has been called BUT THE CODE WAS COMMENTED OUT.  FIX FIX FIX !!!!" );
+//  NSInputStream * __strong istreamARC;
+//  NSOutputStream * __strong ostreamARC;
+//  // This is done to make ARC happy...
+//  NSInputStream __autoreleasing *istreamARCTMP = istreamARC;
+//  NSOutputStream __autoreleasing *ostreamARCTMP = ostreamARC;
+//
+//  NSURL *site = [NSURL URLWithString: serverName];
+//  if (!site) {
+//    NSLog(@"Error 1");
+//    return;
+//  }
+//
+//   NSLog(@"host name: %@", [site host]);
+//  [NSStream getStreamsToHostWithName: serverName
+//                                port: portNumber
+//                         inputStream: istreamARCTMP
+//                        outputStream: ostreamARCTMP];
+//
+//  // Looks ugly... but makes ARC happy
+//  istreamARC = istreamARCTMP;
+//  ostreamARC = ostreamARCTMP;
+//
+//  istream = istreamARC;
+//  ostream = ostreamARC;
+//
+//  if (istream == nil)
+//    NSLog(@"Error 2");
+//
+//  [istream retain];
+//  [istream setDelegate: self];
+//  [istream scheduleInRunLoop: [NSRunLoop currentRunLoop]
+//                     forMode: NSDefaultRunLoopMode];
+//  [istream open];
+//
+//  [ostream retain];
+//  [ostream setDelegate: self];
+//  [ostream scheduleInRunLoop: [NSRunLoop currentRunLoop]
+//                     forMode: NSDefaultRunLoopMode];
+//  [ostream open];
+//
+//  if (ostream == nil)
+//    NSLog(@"Error 3");
+//
   //isConnected = YES;
 }
 
@@ -157,18 +174,15 @@ static bool SuccessAlertIsDisplayed = NO;
             [[line substringFromIndex: 2] componentsSeparatedByString: @" "]];
       }
     }
-    [str release];
-    [data release];
   }
   else if (eventCode == NSStreamEventOpenCompleted) {
     if (!SuccessAlertIsDisplayed) {
       SuccessAlertIsDisplayed = YES;
-      [[[[UIAlertView alloc] initWithTitle: @"Connected"
+      [[[UIAlertView alloc] initWithTitle: @"Connected"
                                    message: @"Connected successfully to remote chess server."
                                   delegate: self
                          cancelButtonTitle: nil
                          otherButtonTitles: @"OK", nil]
-         autorelease]
         show];
     }
     isConnected = YES;
@@ -177,12 +191,11 @@ static bool SuccessAlertIsDisplayed = NO;
   else if (eventCode == NSStreamEventErrorOccurred) {
     if (!ErrorAlertIsDisplayed) {
       ErrorAlertIsDisplayed = YES;
-      [[[[UIAlertView alloc] initWithTitle: @"Error:"
+      [[[UIAlertView alloc] initWithTitle: @"Error:"
                                    message: @"Failed to connect to server. Please make sure the server is running, and that the IP and port number are correct."
                                   delegate: self
                          cancelButtonTitle: nil
                          otherButtonTitles: @"OK", nil]
-         autorelease]
         show];
     }
     NSLog(@"error occured");
@@ -197,9 +210,6 @@ static bool SuccessAlertIsDisplayed = NO;
 
 - (void)dealloc {
   [self disconnect];
-  [istream release];
-  [ostream release];
-  [super dealloc];
 }
 
 

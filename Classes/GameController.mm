@@ -67,7 +67,7 @@ using namespace Chess;
     id sndpath = [[NSBundle mainBundle] pathForResource: @"Click"
                                                  ofType: @"wav"
                                             inDirectory: @"/"];
-    CFURLRef baseURL = (CFURLRef)[[NSURL alloc] initFileURLWithPath: sndpath];
+    CFURLRef baseURL = (__bridge_retained CFURLRef)[[NSURL alloc] initFileURLWithPath: sndpath];
     AudioServicesCreateSystemSoundID(baseURL, &clickSound);
 
     engineController = nil;
@@ -121,14 +121,12 @@ using namespace Chess;
 
 - (void)startNewGame {
   NSLog(@"startNewGame");
-  [game release];
 
   [boardView hideLastMove];
   [boardView stopHighlighting];
 
   for (PieceImageView *piv in pieceViews)
     [piv removeFromSuperview];
-  [pieceViews release];
 
   game = [[Game alloc] initWithGameController: self];
   gameLevel = [[Options sharedOptions] gameLevel];
@@ -212,7 +210,6 @@ clickedButtonAtIndex:(NSInteger)buttonIndex {
     // explanation.
     static const PieceType prom[4] = { QUEEN, ROOK, KNIGHT, BISHOP };
     assert(buttonIndex >= 0 && buttonIndex < 4);
-    [actionSheet release];
     [self doMoveFrom: pendingFrom to: pendingTo promotion: prom[buttonIndex]];
   }
   else if ([[actionSheet title] isEqualToString: @"Promote to:"]) {
@@ -220,7 +217,6 @@ clickedButtonAtIndex:(NSInteger)buttonIndex {
     // distinguish between promotions in the two move input methods.
     static const PieceType prom[4] = { QUEEN, ROOK, KNIGHT, BISHOP };
     assert(buttonIndex >= 0 && buttonIndex < 4);
-    [actionSheet release];
 
     Move m = make_promotion_move(pendingFrom, pendingTo, prom[buttonIndex]);
     [self animateMove: m];
@@ -562,7 +558,6 @@ clickedButtonAtIndex:(NSInteger)buttonIndex {
   [piv setAlpha: 1.0];
   [UIView commitAnimations];
 
-  [piv release];
 }
 
 
@@ -682,7 +677,6 @@ clickedButtonAtIndex:(NSInteger)buttonIndex {
     // Release piece images
     for (PieceImageView *piv in pieceViews)
       [piv removeFromSuperview];
-    [pieceViews release];
 
     // Update game
     [game toBeginning];
@@ -830,7 +824,6 @@ clickedButtonAtIndex:(NSInteger)buttonIndex {
     // Release piece images
     for (PieceImageView *piv in pieceViews)
       [piv removeFromSuperview];
-    [pieceViews release];
 
     // Update game
     [game toEnd];
@@ -895,7 +888,6 @@ clickedButtonAtIndex:(NSInteger)buttonIndex {
       [piv setAlpha: 0.0];
       [boardView addSubview: piv];
       [pieceViews addObject: piv];
-      [piv release];
     }
   }
   if (animate) {
@@ -942,18 +934,18 @@ clickedButtonAtIndex:(NSInteger)buttonIndex {
 
 - (void)showHint {
   if (gameMode == GAME_MODE_ANALYSE)
-    [[[[UIAlertView alloc] initWithTitle: @"Hints are not available in analyse mode!"
+    [[[UIAlertView alloc] initWithTitle: @"Hints are not available in analyse mode!"
                                  message: nil
                                 delegate: self
                        cancelButtonTitle: nil
-                       otherButtonTitles: @"OK", nil] autorelease]
+                       otherButtonTitles: @"OK", nil]
       show];
   else if (gameMode == GAME_MODE_TWO_PLAYER)
-    [[[[UIAlertView alloc] initWithTitle: @"Hints are not available in two player mode!"
+    [[[UIAlertView alloc] initWithTitle: @"Hints are not available in two player mode!"
                                  message: nil
                                 delegate: self
                        cancelButtonTitle: nil
-                       otherButtonTitles: @"OK", nil] autorelease]
+                       otherButtonTitles: @"OK", nil]
       show];
   else {
     Move mlist[256], m;
@@ -972,11 +964,11 @@ clickedButtonAtIndex:(NSInteger)buttonIndex {
         moveToSquareAndBack: [self rotateSquare: to]];
     }
     else
-      [[[[UIAlertView alloc] initWithTitle: @"No hint available!"
+      [[[UIAlertView alloc] initWithTitle: @"No hint available!"
                                    message: nil
                                   delegate: self
                          cancelButtonTitle: nil
-                         otherButtonTitles: @"OK", nil] autorelease]
+                         otherButtonTitles: @"OK", nil]
         show];
   }
 }
@@ -1304,23 +1296,21 @@ clickedButtonAtIndex:(NSInteger)buttonIndex {
 
 - (void)gameEndTest {
   if ([game positionIsMate]) {
-    [[[[UIAlertView alloc] initWithTitle: (([game sideToMove] == WHITE)?
+    [[[UIAlertView alloc] initWithTitle: (([game sideToMove] == WHITE)?
                                            @"Black wins" : @"White wins")
                                  message: @"Checkmate!"
                                 delegate: self
                        cancelButtonTitle: nil
                        otherButtonTitles: @"OK", nil]
-       autorelease]
       show];
     [game setResult: (([game sideToMove] == WHITE)? @"0-1" : @"1-0")];
   }
   else if ([game positionIsDraw]) {
-    [[[[UIAlertView alloc] initWithTitle: @"Game drawn"
+    [[[UIAlertView alloc] initWithTitle: @"Game drawn"
                                  message: [game drawReason]
                                 delegate: self
                        cancelButtonTitle: nil
                        otherButtonTitles: @"OK", nil]
-       autorelease]
       show];
     [game setResult: @"1/2-1/2"];
   }
@@ -1329,7 +1319,7 @@ clickedButtonAtIndex:(NSInteger)buttonIndex {
 
 - (void)loadPieceImages {
   for (Piece p = WP; p <= BK; p++)
-    [pieceImages[p] release];
+    ;
   static NSString *pieceImageNames[16] = {
     nil, @"WPawn", @"WKnight", @"WBishop", @"WRook", @"WQueen", @"WKing", nil,
     nil, @"BPawn", @"BKnight", @"BBishop", @"BRook", @"BQueen", @"BKing", nil
@@ -1338,9 +1328,8 @@ clickedButtonAtIndex:(NSInteger)buttonIndex {
   for (Piece p = WP; p <= BK; p++) {
     if (piece_is_ok(p))
       pieceImages[p] =
-        [[UIImage imageNamed: [NSString stringWithFormat: @"%@%@.tiff",
-                                        pieceSet, pieceImageNames[p]]]
-          retain];
+        [UIImage imageNamed: [NSString stringWithFormat: @"%@%@.tiff",
+                                        pieceSet, pieceImageNames[p]]];
     else
       pieceImages[p] = nil;
   }
@@ -1361,10 +1350,8 @@ clickedButtonAtIndex:(NSInteger)buttonIndex {
 
 
 - (void)gameFromPGNString:(NSString *)pgnString {
-  [game release];
   for (PieceImageView *piv in pieceViews)
     [piv removeFromSuperview];
-  [pieceViews release];
 
   @try {
     game = [[Game alloc] initWithGameController: self PGNString: pgnString];
@@ -1400,10 +1387,8 @@ clickedButtonAtIndex:(NSInteger)buttonIndex {
 
 
 - (void)gameFromFEN:(NSString *)fen {
-  [game release];
   for (PieceImageView *piv in pieceViews)
     [piv removeFromSuperview];
-  [pieceViews release];
 
   game = [[Game alloc] initWithGameController: self FEN: fen];
   if ([remoteEngineController isConnected])
@@ -1494,20 +1479,16 @@ clickedButtonAtIndex:(NSInteger)buttonIndex {
 
 - (void)dealloc {
   NSLog(@"GameController dealloc");
-  [remoteEngineController release];
   [engineController quit];
-  [game release];
-  [pieceViews release]; // Should we remove them from superview first??
+   // Should we remove them from superview first??
   for (Piece p = WP; p <= BK; p++)
-    [pieceImages[p] release];
-  [engineController release];
+    ;
 
   [[NSNotificationCenter defaultCenter] removeObserver: self];
   AudioServicesDisposeSystemSoundID(clickSound);
 
   //while ([engineController engineThreadIsRunning]);
 
-  [super dealloc];
 }
 
 

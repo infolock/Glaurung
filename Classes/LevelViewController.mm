@@ -36,12 +36,11 @@
 - (void)loadView {
   [super loadView];
   [[self navigationItem] setRightBarButtonItem:
-                           [[[UIBarButtonItem alloc]
+                           [[UIBarButtonItem alloc]
                               initWithTitle: @"Done"
                                       style: UIBarButtonItemStylePlain
                                      target: boardViewController
-                                     action: @selector(levelsMenuDonePressed)]
-                             autorelease]];
+                                     action: @selector(levelsMenuDonePressed)]];
 }
 
 
@@ -82,9 +81,8 @@
   UITableViewCell *cell =
     [[self tableView] dequeueReusableCellWithIdentifier: @"any-cell"];
   if (cell == nil)
-    cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault
-                                   reuseIdentifier: @"any-cell"]
-             autorelease];
+    cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault
+                                   reuseIdentifier: @"any-cell"];
   if (section == 0) {
     [cell setAccessoryType:
             (([[Options sharedOptions] gameMode] == (GameMode)row)?
@@ -184,9 +182,6 @@
 }
 
 
-- (void)dealloc {
-  [super dealloc];
-}
 
 
 @end

@@ -83,12 +83,12 @@ enum GameLevel {
 @property (nonatomic, readonly) UIColor *highlightColor;
 @property (nonatomic, readonly) UIImage *darkSquareImage;
 @property (nonatomic, readonly) UIImage *lightSquareImage;
-@property (nonatomic, retain) NSString *colorScheme;
-@property (nonatomic, retain) NSString *playStyle;
-@property (nonatomic, retain) NSString *bookVariety;
+@property (nonatomic, strong) NSString *colorScheme;
+@property (nonatomic, strong) NSString *playStyle;
+@property (nonatomic, strong) NSString *bookVariety;
 @property (nonatomic, readonly) BOOL bookVarietyWasChanged;
-@property (nonatomic, retain) NSString *pieceSet;
-@property (nonatomic, retain) NSString *soundVolume;
+@property (nonatomic, strong) NSString *pieceSet;
+@property (nonatomic, strong) NSString *soundVolume;
 @property (nonatomic, readwrite) BOOL figurineNotation;
 @property (nonatomic, readwrite) BOOL showAnalysis;
 @property (nonatomic, readwrite) BOOL showBookMoves;
@@ -99,14 +99,14 @@ enum GameLevel {
 @property (nonatomic, readonly) BOOL gameModeWasChanged;
 @property (nonatomic, readonly) BOOL gameLevelWasChanged;
 @property (nonatomic, readonly) BOOL playStyleWasChanged;
-@property (nonatomic, retain) NSString *saveGameFile;
-@property (nonatomic, retain) NSString *emailAddress;
-@property (nonatomic, retain) NSString *fullUserName;
+@property (nonatomic, strong) NSString *saveGameFile;
+@property (nonatomic, strong) NSString *emailAddress;
+@property (nonatomic, strong) NSString *fullUserName;
 @property (nonatomic, readonly) BOOL displayMoveGestureStepForwardHint;
 @property (nonatomic, readonly) BOOL displayMoveGestureTakebackHint;
 @property (nonatomic, assign) int strength;
 @property (nonatomic, readonly) BOOL strengthWasChanged;
-@property (nonatomic, retain) NSString *serverName;
+@property (nonatomic, strong) NSString *serverName;
 @property (nonatomic, assign) int serverPort;
 
 + (Options *)sharedOptions;

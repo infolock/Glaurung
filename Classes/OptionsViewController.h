@@ -21,10 +21,10 @@
 @class BoardViewController;
 
 @interface OptionsViewController : UITableViewController {
-  BoardViewController *boardViewController;
+  BoardViewController *__weak boardViewController;
 }
 
-@property (nonatomic, readonly) BoardViewController *boardViewController;
+@property (weak, nonatomic, readonly) BoardViewController *boardViewController;
 
 - (id)initWithBoardViewController:(BoardViewController *)bvc;
 - (void)deselect:(UITableView *)tableView;

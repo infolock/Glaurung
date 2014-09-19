@@ -33,7 +33,7 @@
   EngineController *engineController;
   RemoteEngineController *remoteEngineController;
   BoardView *boardView;
-  UILabel *analysisView, *whiteClockView, *blackClockView, *searchStatsView;
+  UILabel *analysisView, *__weak whiteClockView, *__weak blackClockView, *__weak searchStatsView;
   MoveListView *moveListView;
   Game *game;
   NSMutableArray *pieceViews;
@@ -50,9 +50,9 @@
   LastMoveView *lastMoveView;
 }
 
-@property (nonatomic, readonly) UILabel *whiteClockView;
-@property (nonatomic, readonly) UILabel *blackClockView;
-@property (nonatomic, readonly) UILabel *searchStatsView;
+@property (weak, nonatomic, readonly) UILabel *whiteClockView;
+@property (weak, nonatomic, readonly) UILabel *blackClockView;
+@property (weak, nonatomic, readonly) UILabel *searchStatsView;
 @property (nonatomic, readonly) Game *game;
 @property (nonatomic, assign) GameMode gameMode;
 @property (nonatomic, readonly) BOOL rotated;

@@ -22,13 +22,13 @@
 @class SetupBoardView;
 
 @interface SetupViewController : UIViewController {
-  BoardViewController *boardViewController;
+  BoardViewController *__weak boardViewController;
   SetupBoardView *boardView;
   UISegmentedControl *menu;
   NSString *fen;
 }
 
-@property (nonatomic, readonly) BoardViewController *boardViewController;
+@property (weak, nonatomic, readonly) BoardViewController *boardViewController;
 
 - (id)initWithBoardViewController:(BoardViewController *)bvc
                               fen:(NSString *)aFen;

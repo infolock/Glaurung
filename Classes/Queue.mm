@@ -51,18 +51,14 @@
 - (id)pop {
   id object = nil;
   if (![self isEmpty]) {
-    object = [[contents objectAtIndex: 0] retain];
+    object = [contents objectAtIndex: 0];
     [contents removeObjectAtIndex: 0];
   }
   else
     NSLog(@"Queue undeflow!");
 
-  return [object autorelease];
+  return object;
 }
 
-- (void)dealloc {
-  [contents release];
-  [super dealloc];
-}
 
 @end

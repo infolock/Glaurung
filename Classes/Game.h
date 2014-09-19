@@ -57,13 +57,13 @@ typedef struct {
 }
 
 @property (nonatomic, readonly) ChessClock *clock;
-@property (nonatomic, retain) NSString *event;
-@property (nonatomic, retain) NSString *site;
-@property (nonatomic, retain) NSString *date;
-@property (nonatomic, retain) NSString *round;
-@property (nonatomic, retain) NSString *whitePlayer;
-@property (nonatomic, retain) NSString *blackPlayer;
-@property (nonatomic, retain) NSString *result;
+@property (nonatomic, strong) NSString *event;
+@property (nonatomic, strong) NSString *site;
+@property (nonatomic, strong) NSString *date;
+@property (nonatomic, strong) NSString *round;
+@property (nonatomic, strong) NSString *whitePlayer;
+@property (nonatomic, strong) NSString *blackPlayer;
+@property (nonatomic, strong) NSString *result;
 @property (nonatomic, readonly) int currentMoveIndex;
 
 - (id)initWithGameController:(GameController *)gc FEN:(NSString *)fen;

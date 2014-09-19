@@ -48,23 +48,21 @@
 - (void)loadView {
   [super loadView];
   [[self navigationItem] setRightBarButtonItem:
-                           [[[UIBarButtonItem alloc]
+                           [[UIBarButtonItem alloc]
                               initWithTitle: (email? @"E-mail" : @"Save")
                                       style: UIBarButtonItemStylePlain
                                      target: self
                                      action: (email?
                                               @selector(emailMenuDonePressed) :
-                                              @selector(saveMenuDonePressed))]
-                             autorelease]];
+                                              @selector(saveMenuDonePressed))]];
   [[self navigationItem] setLeftBarButtonItem:
-                           [[[UIBarButtonItem alloc]
+                           [[UIBarButtonItem alloc]
                               initWithTitle: @"Cancel"
                                       style: UIBarButtonItemStylePlain
                                      target: boardViewController
                                      action: (email?
                                               @selector(emailMenuCancelPressed) :
-                                              @selector(saveMenuCancelPressed))]
-                             autorelease]];
+                                              @selector(saveMenuCancelPressed))]];
 }
 
 
@@ -111,9 +109,8 @@
   */
   UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier: @"any-cell"];
   if (cell == nil)
-    cell = [[[UITableViewCell alloc] initWithStyle: UITableViewCellStyleValue1
-                                   reuseIdentifier: @"any-cell"]
-             autorelease];
+    cell = [[UITableViewCell alloc] initWithStyle: UITableViewCellStyleValue1
+                                   reuseIdentifier: @"any-cell"];
   
   if (section == 0) {
     if (row == 0) {
@@ -224,20 +221,17 @@ didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     }
     else
       assert(NO);
-    [pgnTFC release];
   }
   else if (section == 1) { // E-mail address or PGN file
     if (email) {
       EmailAddressController *eac = [[EmailAddressController alloc]
                                       initWithGameDetailsController: self];
       [[self navigationController] pushViewController: eac animated: YES];
-      [eac release];
     }
     else {
       SaveFileListController *sflc = [[SaveFileListController alloc]
                                        initWithGameDetailsController: self];
       [[self navigationController] pushViewController: sflc animated: YES];
-      [sflc release];
     }
   }
 }
@@ -268,11 +262,11 @@ clickedButtonAtIndex:(NSInteger)buttonIndex {
 
 - (void)emailMenuDonePressed {
   if ([[game result] isEqualToString: @"*"])
-    [[[[UIAlertView alloc] initWithTitle: @"Game has no result"
+    [[[UIAlertView alloc] initWithTitle: @"Game has no result"
                                  message: @"You have not specified the result of the game. Really e-mail game without a result?"
                                 delegate: self
                        cancelButtonTitle: @"Cancel"
-                       otherButtonTitles: @"OK", nil] autorelease]
+                       otherButtonTitles: @"OK", nil]
       show];
   else
     [boardViewController emailMenuDonePressed];
@@ -282,20 +276,17 @@ clickedButtonAtIndex:(NSInteger)buttonIndex {
 - (void)saveMenuDonePressed {
   //NSLog(@"saving to %@", PGN_DIRECTORY);
   if ([[game result] isEqualToString: @"*"])
-    [[[[UIAlertView alloc] initWithTitle: @"Game has no result"
+    [[[UIAlertView alloc] initWithTitle: @"Game has no result"
                                  message: @"You have not specified the result of the game. Really save game without a result?"
                                 delegate: self
                        cancelButtonTitle: @"Cancel"
-                       otherButtonTitles: @"OK", nil] autorelease]
+                       otherButtonTitles: @"OK", nil]
       show];
   else
     [boardViewController saveMenuDonePressed];
 }
 
 
-- (void)dealloc {
-  [super dealloc];
-}
 
 
 @end

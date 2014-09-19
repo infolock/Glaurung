@@ -29,6 +29,7 @@
 #include "../Chess/mersenne.h"
 #include "../Chess/movepick.h"
 #include "../Chess/position.h"
+#import "MoveListView.h"
 
 using namespace Chess;
 
@@ -80,43 +81,40 @@ using namespace Chess;
              forKey: @"rotateBoard"];
   [defaults synchronize];
 
-  [viewController release];
-  [gameController release];
-  [[Options sharedOptions] release];
-  [window release];
+  [Options sharedOptions];
 }
 
 
 - (void)backgroundInit:(id)anObject {
-  NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
+  @autoreleasepool {
 
-  gameController =
-    [[GameController alloc] initWithBoardView: [viewController boardView]
-                                 moveListView: [viewController moveListView]
-                                 analysisView: [viewController analysisView]
-                               whiteClockView: [viewController whiteClockView]
-                               blackClockView: [viewController blackClockView]
-                              searchStatsView: [viewController searchStatsView]];
+    gameController =
+      [[GameController alloc] initWithBoardView: [viewController boardView]
+                                   moveListView: [viewController moveListView]
+                                   analysisView: [viewController analysisView]
+                                 whiteClockView: [viewController whiteClockView]
+                                 blackClockView: [viewController blackClockView]
+                                searchStatsView: [viewController searchStatsView]];
 
-  /* Chess init */
-  init_mersenne();
-  init_direction_table();
-  init_bitboards();
-  Position::init_zobrist();
-  Position::init_piece_square_tables();
-  MovePicker::init_phase_table();
+    /* Chess init */
+    init_mersenne();
+    init_direction_table();
+    init_bitboards();
+    Position::init_zobrist();
+    Position::init_piece_square_tables();
+    MovePicker::init_phase_table();
 
-  // Make random number generation less deterministic, for book moves
-  int i = abs(get_system_time() % 10000);
-  for (int j = 0; j < i; j++)
-    genrand_int32();
+    // Make random number generation less deterministic, for book moves
+    int i = abs(get_system_time() % 10000);
+    for (int j = 0; j < i; j++)
+      genrand_int32();
 
-  [gameController loadPieceImages];
-  [self performSelectorOnMainThread: @selector(backgroundInitFinished:)
-                         withObject: nil
-                      waitUntilDone: NO];
+    [gameController loadPieceImages];
+    [self performSelectorOnMainThread: @selector(backgroundInitFinished:)
+                           withObject: nil
+                        waitUntilDone: NO];
 
-  [pool release];
+  }
 }
 
 
@@ -172,7 +170,6 @@ using namespace Chess;
     [gameController release];
     [window release];
   */
-  [super dealloc];
 }
 
 

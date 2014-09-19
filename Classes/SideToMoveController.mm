@@ -28,7 +28,7 @@
 
 - (id)initWithFen:(NSString *)aFen {
   if (self = [super init]) {
-    fen = [aFen retain];
+    fen = aFen;
   }
   return self;
 }
@@ -43,17 +43,15 @@
 
   // [self setTitle: @"Side to move"];
   [[self navigationItem]
-    setRightBarButtonItem: [[[UIBarButtonItem alloc]
+    setRightBarButtonItem: [[UIBarButtonItem alloc]
                               initWithTitle: @"Done"
                                       style: UIBarButtonItemStylePlain
                                      target: self
-                                     action: @selector(donePressed)]
-                             autorelease]];
+                                     action: @selector(donePressed)]];
   boardView = [[SetupBoardView alloc] initWithController: self
                                                      fen: fen
                                                    phase: PHASE_EDIT_STM];
   [contentView addSubview: boardView];
-  [boardView release];
 
   // UISegmentedControl for picking side to move
   NSArray *buttonNames =
@@ -71,7 +69,6 @@
   }
   else [segmentedControl setSelectedSegmentIndex: -1];
   [contentView addSubview: segmentedControl];
-  [segmentedControl release];
 }
 
 
@@ -84,11 +81,11 @@
 - (void)donePressed {
   NSLog(@"Done");
   if ([segmentedControl selectedSegmentIndex] == -1)
-    [[[[UIAlertView alloc] initWithTitle: @"Please select side to move!"
+    [[[UIAlertView alloc] initWithTitle: @"Please select side to move!"
                                  message: @""
                                 delegate: self
                        cancelButtonTitle: nil
-                       otherButtonTitles: @"OK", nil] autorelease]
+                       otherButtonTitles: @"OK", nil]
       show];
   else {
     if ([[boardView maybeCastleString] isEqualToString: @"-"]) {
@@ -117,7 +114,6 @@
                                    (([segmentedControl selectedSegmentIndex] == 0)? 'w' : 'b'),
                                    [boardView maybeCastleString]]];
         [[self navigationController] pushViewController: epc animated: YES];
-        [epc release];
       }
     }
     else {
@@ -128,16 +124,11 @@
                                  (([segmentedControl selectedSegmentIndex] == 0)? 'w' : 'b'),
                                  [boardView maybeCastleString]]];
       [[self navigationController] pushViewController: crc animated: YES];
-      [crc release];
     }
   }
 }
 
 
-- (void)dealloc {
-  [fen release];
-  [super dealloc];
-}
 
 
 @end

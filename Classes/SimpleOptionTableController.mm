@@ -31,32 +31,27 @@ parentViewController:(OptionsViewController *)ovc {
     [self setTitle: optionName];
 
     if ([optionName isEqualToString: @"Play style"]) {
-      contents = [[NSArray arrayWithObjects: @"Passive", @"Solid", @"Active",
-                           @"Aggressive", @"Suicidal", @"Random", nil]
-                   retain];
-      slotName = [@"playStyle" retain];
+      contents = [NSArray arrayWithObjects: @"Passive", @"Solid", @"Active",
+                           @"Aggressive", @"Suicidal", @"Random", nil];
+      slotName = @"playStyle";
     }
     else if ([optionName isEqualToString: @"Book variety"]) {
-      contents = [[NSArray arrayWithObjects: @"Low", @"Medium", @"High", nil]
-                   retain];
-      slotName = [@"bookVariety" retain];
+      contents = [NSArray arrayWithObjects: @"Low", @"Medium", @"High", nil];
+      slotName = @"bookVariety";
     }
     else if ([optionName isEqualToString: @"Piece set"]) {
-      contents = [[NSArray arrayWithObjects: @"Alpha", @"USCF",
-                           @"XBoard", @"Modern", nil]
-                   retain];
-      slotName = [@"pieceSet" retain];
+      contents = [NSArray arrayWithObjects: @"Alpha", @"USCF",
+                           @"XBoard", @"Modern", nil];
+      slotName = @"pieceSet";
     }
     else if ([optionName isEqualToString: @"Color scheme"]) {
-      contents = [[NSArray arrayWithObjects: @"Brown", @"Blue", @"Green",
-                           @"Red", @"Gray", @"Wood", @"Marble", nil]
-                   retain];
-      slotName = [@"colorScheme" retain];
+      contents = [NSArray arrayWithObjects: @"Brown", @"Blue", @"Green",
+                           @"Red", @"Gray", @"Wood", @"Marble", nil];
+      slotName = @"colorScheme";
     }
     else if ([optionName isEqualToString: @"Sounds"]) {
-      contents = [[NSArray arrayWithObjects: @"Loud", @"Soft", @"Off", nil]
-                   retain];
-      slotName = [@"soundVolume" retain];
+      contents = [NSArray arrayWithObjects: @"Loud", @"Soft", @"Off", nil];
+      slotName = @"soundVolume";
     }
   }
   return self;
@@ -81,9 +76,8 @@ parentViewController:(OptionsViewController *)ovc {
   UITableViewCell *cell =
     [[self tableView] dequeueReusableCellWithIdentifier: @"any-cell"];
   if (cell == nil) {
-    cell = [[[UITableViewCell alloc] initWithStyle: UITableViewCellStyleDefault
-                                   reuseIdentifier: @"any-cell"]
-             autorelease];
+    cell = [[UITableViewCell alloc] initWithStyle: UITableViewCellStyleDefault
+                                   reuseIdentifier: @"any-cell"];
   }
 
   [[cell textLabel] setText: [contents objectAtIndex: row]];
@@ -125,11 +119,6 @@ parentViewController:(OptionsViewController *)ovc {
 }
 
 
-- (void)dealloc {
-  [contents release];
-  [slotName release];
-  [super dealloc];
-}
 
 
 @end

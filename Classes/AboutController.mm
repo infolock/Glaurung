@@ -38,8 +38,6 @@
   [webView setScalesPageToFit: YES];
   [webView loadRequest: req];
   [self setView: webView];
-  [webView release];
-  [url release];
 }
 
 
@@ -49,9 +47,6 @@
 }
 
 
-- (void)dealloc {
-  [super dealloc];
-}
 
 
 @end

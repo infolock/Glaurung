@@ -30,7 +30,7 @@ using namespace Chess;
 @interface BoardView : UIView {
   UIColor *darkSquareColor, *lightSquareColor;
   UIImage *darkSquareImage, *lightSquareImage;
-  GameController *gameController;
+  GameController *__weak gameController;
   HighlightedSquaresView *highlightedSquaresView;
   Square highlightedSquares[32];
   SelectedSquareView *selectedSquareView;
@@ -38,7 +38,7 @@ using namespace Chess;
   LastMoveView *lastMoveView;
 }
 
-@property (nonatomic, assign) GameController *gameController;
+@property (nonatomic, weak) GameController *gameController;
 @property (nonatomic, readonly) Square fromSquare;
 
 - (Square)squareAtPoint:(CGPoint)point;

@@ -39,8 +39,8 @@ using namespace Chess;
   if (self = [super initWithFrame:frame]) {
     darkSquareColor = [[Options sharedOptions] darkSquareColor];
     lightSquareColor = [[Options sharedOptions] lightSquareColor];
-    darkSquareImage = [[[Options sharedOptions] darkSquareImage] retain];
-    lightSquareImage = [[[Options sharedOptions] lightSquareImage] retain];
+    darkSquareImage = [[Options sharedOptions] darkSquareImage];
+    lightSquareImage = [[Options sharedOptions] lightSquareImage];
     selectedSquare = SQ_NONE;
     fromSquare = SQ_NONE;
     [[NSNotificationCenter defaultCenter] addObserver: self
@@ -120,12 +120,10 @@ using namespace Chess;
 - (void)stopHighlighting {
   if (highlightedSquaresView) {
     [highlightedSquaresView removeFromSuperview];
-    [highlightedSquaresView release];
     highlightedSquaresView = nil;
   }
   if (selectedSquareView) {
     [selectedSquareView removeFromSuperview];
-    [selectedSquareView release];
     selectedSquareView = nil;
   }
   selectedSquare = fromSquare = SQ_NONE;
@@ -153,10 +151,8 @@ using namespace Chess;
 - (void)colorsChanged:(NSNotification *)aNotification {
   darkSquareColor = [[Options sharedOptions] darkSquareColor];
   lightSquareColor = [[Options sharedOptions] lightSquareColor];
-  [darkSquareImage release];
-  darkSquareImage = [[[Options sharedOptions] darkSquareImage] retain];
-  [lightSquareImage release];
-  lightSquareImage = [[[Options sharedOptions] lightSquareImage] retain];
+  darkSquareImage = [[Options sharedOptions] darkSquareImage];
+  lightSquareImage = [[Options sharedOptions] lightSquareImage];
   if (lastMoveView)
     [lastMoveView setNeedsDisplay];
   [self setNeedsDisplay];
@@ -173,7 +169,6 @@ using namespace Chess;
   [lastMoveView setUserInteractionEnabled: NO];
   [lastMoveView setOpaque: NO];
   [self addSubview: lastMoveView];
-  [lastMoveView release];
 }
 
 
@@ -234,12 +229,7 @@ using namespace Chess;
 /// Clean up.
 
 - (void)dealloc {
-  [darkSquareColor release];
-  [lightSquareColor release];
-  [darkSquareImage release];
-  [lightSquareImage release];
   [[NSNotificationCenter defaultCenter] removeObserver: self];
-  [super dealloc];
 }
 
 

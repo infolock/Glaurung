@@ -66,14 +66,13 @@
     lastStartTime = 0;
     whiteNumOfMoves = blackNumOfMoves = 0;
     fixedTime = NO;
-    whiteClockView = [wcv retain];
-    blackClockView = [bcv retain];
-    timer = [[NSTimer scheduledTimerWithTimeInterval: 1.0
+    whiteClockView = wcv;
+    blackClockView = bcv;
+    timer = [NSTimer scheduledTimerWithTimeInterval: 1.0
                                               target: self
                                             selector: @selector(timerWasFired:)
                                             userInfo: nil
-                                             repeats: YES]
-	      retain];
+                                             repeats: YES];
     [whiteClockView setTextColor: [UIColor blackColor]];
     [whiteClockView setText:
 		      [NSString stringWithFormat: @"White: %@",
@@ -100,14 +99,13 @@
     isRunning = NO;
     lastStartTime = 0;
     fixedTime = NO;
-    whiteClockView = [wcv retain];
-    blackClockView = [bcv retain];
-    timer = [[NSTimer scheduledTimerWithTimeInterval: 1.0
+    whiteClockView = wcv;
+    blackClockView = bcv;
+    timer = [NSTimer scheduledTimerWithTimeInterval: 1.0
                                               target: self
                                             selector: @selector(timerWasFired:)
                                             userInfo: nil
-                                             repeats: YES]
-	      retain];
+                                             repeats: YES];
     [whiteClockView setText:
 		      [NSString stringWithFormat: @"White: %@",
 				[self whiteRemainingTimeString]]];
@@ -304,15 +302,11 @@
 
 - (void)stopTimer {
   [timer invalidate];
-  [timer release];
 }
 
 
 - (void)dealloc {
   NSLog(@"ChessClock dealloc");
-  [whiteClockView release];
-  [blackClockView release];
-  [super dealloc];
 }
 
 

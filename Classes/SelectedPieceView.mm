@@ -62,10 +62,9 @@
     for (Piece p = WP; p <= BK; p++) {
       if (piece_is_ok(p))
         pieceImages[p] =
-          [[UIImage imageNamed: [NSString stringWithFormat: @"%@%@.tiff",
+          [UIImage imageNamed: [NSString stringWithFormat: @"%@%@.tiff",
                                           pieceSet,
-                                          pieceImageNames[p]]]
-            retain];
+                                          pieceImageNames[p]]];
       else
         pieceImages[p] = nil;
     }
@@ -76,10 +75,9 @@
         iv = [[UIImageView alloc] initWithFrame: r];
         [iv setImage: pieceImages[(i+1) + (1-j)*8]];
         [self addSubview: iv];
-        [iv release];
       }
     for (Piece p = WP; p <= BK; p++)
-      [pieceImages[p] release];
+      ;
     selRect = [[SelectionRectangle alloc]
                 initWithFrame: CGRectMake(0.0f, 40.0f, 40.0f, 40.0f)];
     [selRect setOpaque: NO];
@@ -122,9 +120,6 @@
 }
 
 
-- (void)dealloc {
-  [super dealloc];
-}
 
 
 @end

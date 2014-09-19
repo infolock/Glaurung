@@ -41,7 +41,7 @@ enum SetupPhase {
   Piece board[64];
   NSMutableArray *pieceViews;
   UIImage *pieceImages[16];
-  SelectedPieceView *selectedPieceView;
+  SelectedPieceView *__weak selectedPieceView;
   SelectedSquareView *selectedSquareView;
   Square selectedSquare;
   Bitboard bitboards[2][16];
@@ -51,7 +51,7 @@ enum SetupPhase {
   Square epSquares[8];
 }
 
-@property (nonatomic, assign) SelectedPieceView *selectedPieceView;
+@property (nonatomic, weak) SelectedPieceView *selectedPieceView;
 
 - (id)initWithController:(id)c
                      fen:(NSString *)fen

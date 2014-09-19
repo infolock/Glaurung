@@ -23,11 +23,11 @@
 
 @interface GameDetailsTableController : UITableViewController {
   BoardViewController *boardViewController;
-  Game *game;
+  Game *__weak game;
   BOOL email;
 }
 
-@property (nonatomic, readonly) Game *game;
+@property (weak, nonatomic, readonly) Game *game;
 
 - (id)initWithBoardViewController:(BoardViewController *)bvc
                              game:(Game *)aGame

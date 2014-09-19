@@ -21,6 +21,7 @@
 #import "RemoteEngineHelpController.h"
 #import "RemoteEngineTableController.h"
 #import "RemoteEngineTextFieldController.h"
+#import "OptionsViewController.h"
 
 @implementation RemoteEngineTableController
 
@@ -61,9 +62,8 @@
 
   UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier: @"any-cell"];
   if (cell == nil)
-    cell = [[[UITableViewCell alloc] initWithStyle: UITableViewCellStyleValue1
-                                   reuseIdentifier: @"any-cell"]
-             autorelease];
+    cell = [[UITableViewCell alloc] initWithStyle: UITableViewCellStyleValue1
+                                   reuseIdentifier: @"any-cell"];
 
   if (section == 0) {
     if (row == 0) {
@@ -87,7 +87,6 @@
       [sw addTarget: self action: @selector(toggleConnected:)
           forControlEvents:UIControlEventValueChanged];
       [cell setAccessoryView: sw];
-      [sw release];
     }
   }
   else if (section == 1) {
@@ -124,7 +123,6 @@
                                           fieldName: @"Server IP address"];
       [[self navigationController] pushViewController: retfc
                                              animated: YES];
-      [retfc release];
     }
     else if (row == 1) {
       retfc = [[RemoteEngineTextFieldController alloc]
@@ -132,7 +130,6 @@
                                           fieldName: @"Server port"];
       [[self navigationController] pushViewController: retfc
                                              animated: YES];
-      [retfc release];
     }
   }
   else if (section == 1) {
@@ -140,7 +137,6 @@
       RemoteEngineHelpController *rehc;
       rehc = [[RemoteEngineHelpController alloc] init];
       [[self navigationController] pushViewController: rehc animated: YES];
-      [rehc release];
     }
   }
 }
@@ -167,10 +163,6 @@
 }
 
 
-- (void)dealloc {
-  //[serverName release];
-  [super dealloc];
-}
 
 
 @end

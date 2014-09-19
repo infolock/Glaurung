@@ -21,11 +21,11 @@
 @class BoardViewController;
 
 @interface LoadFileListController : UITableViewController {
-  BoardViewController *boardViewController;
+  BoardViewController *__weak boardViewController;
   NSMutableArray *fileList;
 }
 
-@property (nonatomic, readonly) BoardViewController *boardViewController;
+@property (weak, nonatomic, readonly) BoardViewController *boardViewController;
 
 - (id)initWithBoardViewController:(BoardViewController *)bvc;
 - (void)updateTableCells;

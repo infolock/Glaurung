@@ -21,11 +21,11 @@
 @class GameController;
 
 @interface MoveListView : UITextView {
-  GameController *gameController;
+  GameController *__weak gameController;
   CGPoint touchStartPoint;
   BOOL horizontalSwipe;
 }
 
-@property (nonatomic,assign) GameController *gameController;
+@property (nonatomic,weak) GameController *gameController;
 
 @end

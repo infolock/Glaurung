@@ -38,12 +38,11 @@
 - (void)loadView {
   [super loadView];
   [[self navigationItem] setRightBarButtonItem:
-                           [[[UIBarButtonItem alloc]
+                           [[UIBarButtonItem alloc]
                               initWithTitle: @"Load game"
                                       style: UIBarButtonItemStylePlain
                                      target: self
-                                     action: @selector(loadButtonPressed)]
-                             autorelease]];
+                                     action: @selector(loadButtonPressed)]];
 }
 
 
@@ -77,9 +76,8 @@
 
   UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier: @"any-cell"];
   if (cell == nil)
-    cell = [[[UITableViewCell alloc] initWithStyle: UITableViewCellStyleValue1
-                                   reuseIdentifier: @"any-cell"]
-             autorelease];
+    cell = [[UITableViewCell alloc] initWithStyle: UITableViewCellStyleValue1
+                                   reuseIdentifier: @"any-cell"];
 
   if (section == 0) {
     if(row == 0) {
@@ -148,9 +146,6 @@
 }
 
 
-- (void)dealloc {
-  [super dealloc];
-}
 
 
 @end
