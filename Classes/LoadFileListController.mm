@@ -32,7 +32,7 @@
     fileList =
       (NSMutableArray *)
       [[[[NSFileManager defaultManager]
-          directoryContentsAtPath: PGN_DIRECTORY]
+          contentsOfDirectoryAtPath: PGN_DIRECTORY error:nil]
          pathsMatchingExtensions: [NSArray arrayWithObjects: @"pgn", nil]]
         retain];
   }
@@ -70,7 +70,7 @@
   UITableViewCell *cell =
     [[self tableView] dequeueReusableCellWithIdentifier: @"any-cell"];
   if (cell == nil) {
-    cell = [[[UITableViewCell alloc] initWithFrame: CGRectZero
+    cell = [[[UITableViewCell alloc] initWithStyle: UITableViewCellStyleDefault
                                    reuseIdentifier: @"any-cell"]
              autorelease];
   }
@@ -84,7 +84,7 @@
   (NSIndexPath *)newIndexPath {
   NSInteger row = [newIndexPath row];
 
-  NSLog(@"selected row %d", row);
+  NSLog(@"selected row %ld", (long)row);
   GameListController *glc = [[GameListController alloc]
                               initWithLoadFileListController: self
                                                     filename: [fileList objectAtIndex: row]];
@@ -152,7 +152,7 @@ else if (editingStyle == UITableViewCellEditingStyleInsert) {
   fileList =
     (NSMutableArray *)
     [[[[NSFileManager defaultManager]
-        directoryContentsAtPath: PGN_DIRECTORY]
+       contentsOfDirectoryAtPath: PGN_DIRECTORY error:nil]
        pathsMatchingExtensions: [NSArray arrayWithObjects: @"pgn", nil]]
       retain];
   [[self tableView] reloadData];

@@ -66,25 +66,25 @@
 
     pieceSet = [defaults objectForKey: @"pieceSet2"];
     if (!pieceSet) {
-      pieceSet = [[NSString stringWithString: @"Alpha"] retain];
+      pieceSet = [@"Alpha" retain];
       [defaults setObject: @"Alpha" forKey: @"pieceSet2"];
     }
 
     playStyle = [defaults objectForKey: @"playStyle2"];
     if (!playStyle) {
-      playStyle = [[NSString stringWithString: @"Active"] retain];
+      playStyle = [@"Active" retain];
       [defaults setObject: @"Active" forKey: @"playStyle2"];
     }
 
     bookVariety = [defaults objectForKey: @"bookVariety2"];
     if (!bookVariety) {
-      bookVariety = [[NSString stringWithString: @"Medium"] retain];
+      bookVariety = [@"Medium" retain];
       [defaults setObject: @"Medium" forKey: @"bookVariety2"];
     }
 
     soundVolume = [defaults objectForKey: @"soundVolume2"];
     if (!soundVolume) {
-      soundVolume = [[NSString stringWithString: @"Soft"] retain];
+      soundVolume = [@"Soft" retain];
       [defaults setObject: @"Soft" forKey: @"soundVolume2"];
     }
 
@@ -97,7 +97,7 @@
 
     colorScheme = [defaults objectForKey: @"colorScheme2"];
     if (!colorScheme) {
-      colorScheme = [[NSString stringWithString: @"Marble"] retain];
+      colorScheme = [@"Marble" retain];
       [defaults setObject: @"Marble" forKey: @"colorScheme2"];
     }
     darkSquareColor = lightSquareColor = highlightColor = nil;
@@ -112,22 +112,22 @@
 
     saveGameFile = [defaults objectForKey: @"saveGameFile2"];
     if (!saveGameFile) {
-      saveGameFile = [[NSString stringWithString: @"My games.pgn"] retain];
+      saveGameFile = [@"My games.pgn" retain];
       [defaults setObject: @"My Games.pgn" forKey: @"saveGameFile2"];
     }
 
     emailAddress = [defaults objectForKey: @"emailAddress2"];
     if (!emailAddress) {
-      emailAddress = [[NSString stringWithString: @""] retain];
+      emailAddress = [@"" retain];
       [defaults setObject: @"" forKey: @"emailAddress2"];
     }
     fullUserName = [defaults objectForKey: @"fullUserName2"];
     if (!fullUserName) {
-      fullUserName = [[NSString stringWithString: @"Me"] retain];
+      fullUserName = [@"Me" retain];
       [defaults setObject: @"Me" forKey: @"fullUserName2"];
     }
 
-    strength = [defaults integerForKey: @"Elo2"];
+    strength = ( int )[defaults integerForKey: @"Elo2"];
     if (!strength) {
       strength = 2450;
       [defaults setInteger: 2450 forKey: @"Elo2"];
@@ -157,11 +157,11 @@
 
     serverName = [defaults objectForKey: @"serverName2"];
     if (!serverName) {
-      serverName = [[NSString stringWithString: @""] retain];
+      serverName = [@"" retain];
       [defaults setObject: @"" forKey: @"serverName2"];
     }
 
-    serverPort = [defaults integerForKey: @"serverPort2"];
+    serverPort = ( int )[defaults integerForKey: @"serverPort2"];
     if (!serverPort) {
       serverPort = 1685;
       [defaults setInteger: 1685 forKey: @"serverPort2"];

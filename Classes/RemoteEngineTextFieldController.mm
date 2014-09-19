@@ -82,7 +82,7 @@
     [[Options sharedOptions] setServerName: [textField text]];
   else if ([fieldName isEqualToString: @"Server port"]) {
     int port;
-    [[NSScanner scannerWithString: [textField text]] scanInteger: &port];
+    [[NSScanner scannerWithString: [textField text]] scanInteger: (NSInteger *)&port];
     [[Options sharedOptions] setServerPort: port];
   }
   else

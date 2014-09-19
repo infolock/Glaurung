@@ -70,7 +70,6 @@
     [segmentedControl setEnabled: NO forSegmentAtIndex: 0];
   }
   else [segmentedControl setSelectedSegmentIndex: -1];
-  [segmentedControl setSegmentedControlStyle: UISegmentedControlStylePlain];
   [contentView addSubview: segmentedControl];
   [segmentedControl release];
 }

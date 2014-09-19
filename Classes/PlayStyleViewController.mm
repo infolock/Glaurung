@@ -40,7 +40,7 @@
   UITableViewCell *cell =
     [[self tableView] dequeueReusableCellWithIdentifier: @"any-cell"];
   if (cell == nil)
-    cell = [[[UITableViewCell alloc] initWithFrame: CGRectZero
+    cell = [[[UITableViewCell alloc] initWithStyle: UITableViewCellStyleDefault
                                    reuseIdentifier: @"any-cell"]
              autorelease];
 
@@ -65,8 +65,8 @@
 
 - (void)tableView: (UITableView *)tableView didSelectRowAtIndexPath:
   (NSIndexPath *)newIndexPath {
-  int row = [newIndexPath row];
-  int section = [newIndexPath section];
+  int row = ( int )newIndexPath.row;
+  int section = ( int )newIndexPath.section;
   NSLog(@"section %d, row %d", section, row);
 }
 

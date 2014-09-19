@@ -314,7 +314,7 @@ const string line_to_san(const Position& pos, Move line[], int startColumn, bool
       s << "\n";
       for(int j = 0; j < startColumn; j++)
         s << " ";
-      length = moveStr.length() + 1;
+      length = ( int )( moveStr.length() + 1 );
     }
     s << ns.str() << moveStr << " ";
 

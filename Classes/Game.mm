@@ -482,22 +482,24 @@ static NSString* breakLinesInString(NSString *string) {
   mstr = [NSMutableString stringWithString: @""];
   j = 0;
   for (i = 0; i < [array count]; i++) {
-    int length = [[array objectAtIndex: i] length];
+    int length = ( int )[array[i] length];
     if (j + length + 1 < 80) {
       if (i > 0) { // HACK
-	[mstr appendString: @" "];
-	j += length + 1;
+          [mstr appendString: @" "];
+          j += length + 1;
+      } else {
+          j += length;
       }
-      else j += length;
-    }
-    else {
+    } else {
       [mstr appendString: @"\n"];
       j = length;
     }
-    [mstr appendString: [array objectAtIndex: i]];
+
+      [mstr appendString: [array objectAtIndex: i]];
   }
-  [array release];
-  return [NSString stringWithString: mstr];
+
+    [array release];
+    return [NSString stringWithString: mstr];
 }
 
 /// pgnMoveListString returns an NSString representing the entire game in short
@@ -578,7 +580,7 @@ static NSString* breakLinesInString(NSString *string) {
   NSMutableString *buf = [NSMutableString stringWithCapacity: 4000];
 
   if ([startFEN isEqualToString: @"rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1"])
-    [buf setString: [NSString stringWithString: @"n\n"]];
+    [buf setString: @"n\n"];
   else
     [buf setString: [NSString stringWithFormat: @"p %@\n", startFEN]];
   if (![self atBeginning]) {
@@ -710,13 +712,13 @@ static NSString* breakLinesInString(NSString *string) {
   switch(currentPosition->is_immediate_draw()) {
 
   case DRAW_MATERIAL:
-    return [NSString stringWithString: @"No mating material"];
+    return @"No mating material";
   case DRAW_50_MOVES:
-    return [NSString stringWithString: @"50 non-reversible moves"];
+    return @"50 non-reversible moves";
   case DRAW_REPETITION:
-    return [NSString stringWithString: @"Third repetition"];
+    return @"Third repetition";
   case DRAW_STALEMATE:
-    return [NSString stringWithString: @"Stalemate"];
+    return @"Stalemate";
   default:
     assert(NO);
     return nil;

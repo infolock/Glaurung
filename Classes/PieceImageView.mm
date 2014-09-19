@@ -238,7 +238,7 @@
 
       // Make the piece slide smoothly to the center of the square:
 
-      CGPoint startPt = [self frame].origin;
+//      CGPoint startPt = [self frame].origin;
       CGPoint endPt =
         CGPointMake(int(square_file(releasedSquare)) * 40.0f,
                     (7-int(square_rank(releasedSquare))) * 40.0f);

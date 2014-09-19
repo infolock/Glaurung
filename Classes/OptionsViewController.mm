@@ -218,8 +218,8 @@
     }
   }
   else {
-    [[cell textLabel] setText: [NSString stringWithFormat: @"section %d, row %d",
-                                         section, row]];
+    [[cell textLabel] setText: [NSString stringWithFormat: @"section %ld, row %ld",
+                                         (long)section, (long)row]];
   }
   return cell;
 }
@@ -234,8 +234,8 @@
 
 - (void)tableView: (UITableView *)tableView didSelectRowAtIndexPath:
   (NSIndexPath *)newIndexPath {
-  int row = [newIndexPath row];
-  int section = [newIndexPath section];
+  int row = ( int )newIndexPath.row;
+  int section = ( int )newIndexPath.section;
   NSLog(@"section %d, row %d", section, row);
 
   [self performSelector: @selector(deselect:) withObject: tableView

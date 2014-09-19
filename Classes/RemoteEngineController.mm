@@ -131,7 +131,7 @@ static bool SuccessAlertIsDisplayed = NO;
     NSMutableData *data = [[NSMutableData alloc] init];
     uint8_t buf[1024];
     unsigned len = 0;
-    len = [(NSInputStream *)stream read: buf maxLength: 1024];
+    len = ( int )[(NSInputStream *)stream read: buf maxLength: 1024];
     if (len) {
       [data appendBytes: (const void *)buf length: len];
       int bytesRead;

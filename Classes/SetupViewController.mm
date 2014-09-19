@@ -51,7 +51,7 @@
 	       @"Clear", @"Cancel", @"Done", nil];
   menu = [[UISegmentedControl alloc] initWithItems: buttonNames];
   [menu setMomentary: YES];
-  [menu setSegmentedControlStyle: UISegmentedControlStyleBar];
+
   [menu setFrame: CGRectMake(0.0f, 0.0f, 300.0f, 20.0f)];
   [menu addTarget: self
            action: @selector(buttonPressed:)

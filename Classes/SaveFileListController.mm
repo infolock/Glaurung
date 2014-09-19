@@ -41,7 +41,7 @@
     fileList =
       (NSMutableArray *)
       [[[[NSFileManager defaultManager]
-          directoryContentsAtPath: PGN_DIRECTORY]
+         contentsOfDirectoryAtPath: PGN_DIRECTORY error:nil]
          pathsMatchingExtensions: [NSArray arrayWithObjects: @"pgn", nil]]
         retain];
   }
@@ -75,7 +75,7 @@
   UITableViewCell *cell =
     [[self tableView] dequeueReusableCellWithIdentifier: @"any-cell"];
   if (cell == nil) {
-    cell = [[[UITableViewCell alloc] initWithFrame: CGRectZero
+    cell = [[[UITableViewCell alloc] initWithStyle: UITableViewCellStyleDefault
                                    reuseIdentifier: @"any-cell"]
              autorelease];
   }

@@ -179,7 +179,7 @@ int get_system_time() {
 #else
     struct timeval t;
     gettimeofday(&t, NULL);
-    return t.tv_sec*1000 + t.tv_usec/1000;
+    return (int)( t.tv_sec*1000 + t.tv_usec/1000 );
 #endif
 }
 
@@ -190,7 +190,7 @@ int get_system_time() {
 
 #  if defined(_SC_NPROCESSORS_ONLN)
 int cpu_count() {
-  return Min(sysconf(_SC_NPROCESSORS_ONLN), MAX_THREADS);
+  return ( int )( Min(sysconf(_SC_NPROCESSORS_ONLN), MAX_THREADS) );
 }
 #  elif defined(__hpux)
 int cpu_count() {

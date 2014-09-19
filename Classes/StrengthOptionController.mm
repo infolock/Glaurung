@@ -71,14 +71,14 @@ numberOfRowsInComponent:(NSInteger)component {
 - (NSString *)pickerView:(UIPickerView *)pickerView
              titleForRow:(NSInteger)row
             forComponent:(NSInteger)component {
-  return [NSString stringWithFormat: @"%d", 800 + (66 - row) * 25];
+  return [NSString stringWithFormat: @"%ld", 800 + (66 - row) * 25];
 }
 
 
 - (void)pickerView:(UIPickerView *)pickerView
       didSelectRow:(NSInteger)row
        inComponent:(NSInteger)component {
-  [[Options sharedOptions] setStrength: 800 + (66 - row) * 25];
+  [[Options sharedOptions] setStrength: 800 + ( 66 - ( int )row ) * 25];
   [parentController updateTableCells];
 }
 

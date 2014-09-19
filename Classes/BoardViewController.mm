@@ -75,14 +75,14 @@
   whiteClockView =
     [[UILabel alloc] initWithFrame: CGRectMake(0.0f, 0.0f, 160.0f, 18.0f)];
   [whiteClockView setFont: [UIFont systemFontOfSize: 14.0]];
-  [whiteClockView setTextAlignment: UITextAlignmentCenter];
+  [whiteClockView setTextAlignment: NSTextAlignmentCenter];
   [whiteClockView setText: @"White: 5:00"];
   [whiteClockView setBackgroundColor: [UIColor lightGrayColor]];
 
   blackClockView =
     [[UILabel alloc] initWithFrame: CGRectMake(160.0f, 0.0f, 160.0f, 18.0f)];
   [blackClockView setFont: [UIFont systemFontOfSize: 14.0]];
-  [blackClockView setTextAlignment: UITextAlignmentCenter];
+  [blackClockView setTextAlignment: NSTextAlignmentCenter];
   [blackClockView setText: @"Black: 5:00"];
   [blackClockView setBackgroundColor: [UIColor lightGrayColor]];
 
@@ -114,34 +114,34 @@
   UIBarButtonItem *button;
 
   button = [[UIBarButtonItem alloc] initWithTitle: @"Game"
-                                            style: UIBarButtonItemStyleBordered
+                                            style: UIBarButtonItemStylePlain
                                            target: self
                                            action: @selector(toolbarButtonPressed:)];
   [button setWidth: 58.0f];
   [buttons addObject: button];
   [button release];
   button = [[UIBarButtonItem alloc] initWithTitle: @"Options"
-                                            style: UIBarButtonItemStyleBordered
+                                            style: UIBarButtonItemStylePlain
                                            target: self
                                            action: @selector(toolbarButtonPressed:)];
   //[button setWidth: 60.0f];
   [buttons addObject: button];
   [button release];
   button = [[UIBarButtonItem alloc] initWithTitle: @"Flip"
-                                            style: UIBarButtonItemStyleBordered
+                                            style: UIBarButtonItemStylePlain
                                            target: self
                                            action: @selector(toolbarButtonPressed:)];
   [buttons addObject: button];
   [button release];
   button = [[UIBarButtonItem alloc] initWithTitle: @"Move"
-                                            style: UIBarButtonItemStyleBordered
+                                            style: UIBarButtonItemStylePlain
                                            target: self
                                            action: @selector(toolbarButtonPressed:)];
   [button setWidth: 53.0f];
   [buttons addObject: button];
   [button release];
   button = [[UIBarButtonItem alloc] initWithTitle: @"Hint"
-                                            style: UIBarButtonItemStyleBordered
+                                            style: UIBarButtonItemStylePlain
                                            target: self
                                            action: @selector(toolbarButtonPressed:)];
   [button setWidth: 49.0f];
@@ -218,7 +218,7 @@ clickedButtonAtIndex:(NSInteger)buttonIndex {
 clickedButtonAtIndex:(NSInteger)buttonIndex {
   NSString *title = [actionSheet title];
 
-  NSLog(@"Menu: %@ selection: %d", title, buttonIndex);
+  NSLog(@"Menu: %@ selection: %ld", title, ( long )buttonIndex);
   if ([title isEqualToString: @"Game"]) {
     UIActionSheet *menu;
     switch(buttonIndex) {

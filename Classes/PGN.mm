@@ -75,7 +75,7 @@ static void raisePGNException(NSString *exceptionreason);
     fopen([[PGN_DIRECTORY stringByAppendingPathComponent: filename]
             UTF8String], "r");
   stat([filename UTF8String], &fs);
-  fileSize = fs.st_size;
+  fileSize = ( int )fs.st_size;
 
   charHack = CHAR_EOF; // DEBUG
   charColumn = 0;
@@ -114,7 +114,7 @@ static void raisePGNException(NSString *exceptionreason);
       gameIndicesSize *= 2;
       gameIndices = (int *)realloc(gameIndices, gameIndicesSize * sizeof(int));
     }
-    gameIndices[numberOfGames] = ftell(file);
+    gameIndices[numberOfGames] = ( int )ftell( file );
     /*
       if (numberOfGames % 200 == 0)
       [progressController

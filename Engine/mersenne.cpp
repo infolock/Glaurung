@@ -133,7 +133,7 @@ uint32_t genrand_int32(void) {
   y ^= (y << 15) & 0xefc60000UL;
   y ^= (y >> 18);
 
-  return y;
+  return (int)y;
 }
 
 uint64_t genrand_int64(void) {
@@ -145,5 +145,5 @@ uint64_t genrand_int64(void) {
 
 void init_mersenne(void) {
   unsigned long init[4]={0x123, 0x234, 0x345, 0x456}, length=4;
-  init_by_array(init, length);
+  init_by_array(init, (int )length);
 }

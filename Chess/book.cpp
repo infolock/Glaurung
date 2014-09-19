@@ -368,7 +368,7 @@ void Book::open(const std::string &fName) {
       std::cerr << "Failed to open book file " << fileName << std::endl;
       exit(EXIT_FAILURE);
     }
-    bookSize = ftell(bookFile) / 16;
+    bookSize = ( int )( ftell(bookFile) / 16 );
     if(bookSize == -1) {
       std::cerr << "Failed to open book file " << fileName << std::endl;
       exit(EXIT_FAILURE);

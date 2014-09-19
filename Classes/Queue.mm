@@ -33,7 +33,7 @@
 }
 
 - (int)size {
-  return [contents count];
+  return ( int )[contents count];
 }
 
 - (id)front {

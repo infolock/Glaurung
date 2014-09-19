@@ -174,8 +174,8 @@
 
 - (void)tableView:(UITableView *)tableView
 didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-  int row = [indexPath row];
-  int section = [indexPath section];
+  int row = ( int )indexPath.row;
+  int section = ( int )indexPath.section;
 
   [self performSelector: @selector(deselect:) withObject: tableView
              afterDelay: 0.1f];

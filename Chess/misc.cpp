@@ -86,7 +86,7 @@ const std::string engine_name() {
 int get_system_time() {
   struct timeval t;
   gettimeofday(&t, NULL);
-  return t.tv_sec*1000 + t.tv_usec/1000;
+  return ( int )( t.tv_sec * 1000 + t.tv_usec / 1000 );
 }
 
 
@@ -96,7 +96,7 @@ int get_system_time() {
 
 #  if defined(_SC_NPROCESSORS_ONLN)
 int cpu_count() {
-  return Min(sysconf(_SC_NPROCESSORS_ONLN), 8);
+  return ( int )Min( sysconf( _SC_NPROCESSORS_ONLN ), 8 );
 }
 #  else
 int cpu_count() {

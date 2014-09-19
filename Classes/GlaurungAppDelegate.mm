@@ -137,21 +137,21 @@ using namespace Chess;
     [gameController
       gameFromFEN: @"rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1"];
 
-  int gameLevel = [defaults integerForKey: @"gameLevel"];
+  int gameLevel = ( int )[defaults integerForKey: @"gameLevel"];
   if (gameLevel) {
     [[Options sharedOptions] setGameLevel: (GameLevel)(gameLevel - 1)];
     [gameController setGameLevel: [[Options sharedOptions] gameLevel]];
   }
 
-  int whiteRemainingTime = [defaults integerForKey: @"whiteRemainingTime"];
-  int blackRemainingTime = [defaults integerForKey: @"blackRemainingTime"];
+  int whiteRemainingTime = ( int )[defaults integerForKey: @"whiteRemainingTime"];
+  int blackRemainingTime = ( int )[defaults integerForKey: @"blackRemainingTime"];
   ChessClock *clock = [[gameController game] clock];
   if (whiteRemainingTime)
     [clock addTimeForWhite: (whiteRemainingTime - [clock whiteRemainingTime])];
   if (blackRemainingTime)
     [clock addTimeForBlack: (blackRemainingTime - [clock blackRemainingTime])];
 
-  int gameMode = [defaults integerForKey: @"gameMode"];
+  int gameMode = ( int )[defaults integerForKey: @"gameMode"];
   if (gameMode) {
     [[Options sharedOptions] setGameMode: (GameMode)(gameMode - 1)];
     [gameController setGameMode: [[Options sharedOptions] gameMode]];

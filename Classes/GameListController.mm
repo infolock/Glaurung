@@ -76,10 +76,10 @@
   UITableViewCell *cell =
     [[self tableView] dequeueReusableCellWithIdentifier: @"any-cell"];
   if (cell == nil)
-    cell = [[[UITableViewCell alloc] initWithFrame: CGRectZero
-                                   reuseIdentifier: @"any-cell"]
-             autorelease];
-  [pgnFile goToGameNumber: row];
+    cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault
+                                   reuseIdentifier:@"any-cell"]
+            autorelease];
+  [pgnFile goToGameNumber: ( int )row];
   [[cell textLabel] setText:
                       [NSString stringWithFormat: @"%@-%@ %@",
                                 [pgnFile white], [pgnFile black], [pgnFile result]]];
@@ -92,7 +92,7 @@
   (NSIndexPath *)newIndexPath {
   NSInteger row = [newIndexPath row];
 
-  GamePreview *gp = [[GamePreview alloc] initWithPGN: pgnFile gameNumber: row];
+  GamePreview *gp = [[GamePreview alloc] initWithPGN: pgnFile gameNumber:( int )row];
   [[self navigationController] pushViewController: gp animated: YES];
   [gp release];
   [self performSelector: @selector(deselect:) withObject: tableView

@@ -43,17 +43,19 @@
   return 2;
 }
 
-- (NSInteger)tableView:(UITableView *)tableView
- numberOfRowsInSection:(NSInteger)section {
-  switch(section) {
-  case 0: return 3;
-  case 1: return 1;
-  }
+-(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+
+    switch(section) {
+        case 0: return 3;
+        case 1: return 1;
+
+        default: return -1;
+    }
 }
 
 
-- (UITableViewCell *)tableView:(UITableView *)tableView
-         cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+-(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+
   NSInteger row = [indexPath row];
   NSInteger section = [indexPath section];
 
@@ -107,8 +109,8 @@
 
 - (void)tableView: (UITableView *)tableView didSelectRowAtIndexPath:
   (NSIndexPath *)newIndexPath {
-  int row = [newIndexPath row];
-  int section = [newIndexPath section];
+  int row = ( int )newIndexPath.row;
+  int section = ( int )newIndexPath.section;
   NSLog(@"section %d, row %d", section, row);
 
   [self performSelector: @selector(deselect:) withObject: tableView
@@ -151,7 +153,8 @@
 
 
 - (void)toggleConnected:(id)sender {
-  if ([sender isOn])
+    // ????  @todo Need to figure out what this ( boardViewController ) should actually be one day ( soon? )...
+  if( [sender isOn] )
     [[parentController boardViewController] connectToServer];
   else
     [[parentController boardViewController] disconnectFromServer];

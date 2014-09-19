@@ -300,7 +300,7 @@ void print_bitboard(Bitboard b) {
 /// program initialization.
 
 void init_bitboards() {
-  int rookDeltas[4][2] = {{0,1},{0,-1},{1,0},{-1,0}};
+//  int rookDeltas[4][2] = {{0,1},{0,-1},{1,0},{-1,0}};
   int bishopDeltas[4][2] = {{1,1},{-1,1},{1,-1},{-1,-1}};
   init_masks();
   init_ray_bitboards();

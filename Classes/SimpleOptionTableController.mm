@@ -34,29 +34,29 @@ parentViewController:(OptionsViewController *)ovc {
       contents = [[NSArray arrayWithObjects: @"Passive", @"Solid", @"Active",
                            @"Aggressive", @"Suicidal", @"Random", nil]
                    retain];
-      slotName = [[NSString stringWithString: @"playStyle"] retain];
+      slotName = [@"playStyle" retain];
     }
     else if ([optionName isEqualToString: @"Book variety"]) {
       contents = [[NSArray arrayWithObjects: @"Low", @"Medium", @"High", nil]
                    retain];
-      slotName = [[NSString stringWithString: @"bookVariety"] retain];
+      slotName = [@"bookVariety" retain];
     }
     else if ([optionName isEqualToString: @"Piece set"]) {
       contents = [[NSArray arrayWithObjects: @"Alpha", @"USCF",
                            @"XBoard", @"Modern", nil]
                    retain];
-      slotName = [[NSString stringWithString: @"pieceSet"] retain];
+      slotName = [@"pieceSet" retain];
     }
     else if ([optionName isEqualToString: @"Color scheme"]) {
       contents = [[NSArray arrayWithObjects: @"Brown", @"Blue", @"Green",
                            @"Red", @"Gray", @"Wood", @"Marble", nil]
                    retain];
-      slotName = [[NSString stringWithString: @"colorScheme"] retain];
+      slotName = [@"colorScheme" retain];
     }
     else if ([optionName isEqualToString: @"Sounds"]) {
       contents = [[NSArray arrayWithObjects: @"Loud", @"Soft", @"Off", nil]
                    retain];
-      slotName = [[NSString stringWithString: @"soundVolume"] retain];
+      slotName = [@"soundVolume" retain];
     }
   }
   return self;
@@ -81,7 +81,7 @@ parentViewController:(OptionsViewController *)ovc {
   UITableViewCell *cell =
     [[self tableView] dequeueReusableCellWithIdentifier: @"any-cell"];
   if (cell == nil) {
-    cell = [[[UITableViewCell alloc] initWithFrame: CGRectZero
+    cell = [[[UITableViewCell alloc] initWithStyle: UITableViewCellStyleDefault
                                    reuseIdentifier: @"any-cell"]
              autorelease];
   }

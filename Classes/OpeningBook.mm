@@ -68,7 +68,7 @@ static Move fix_castling_and_promotion(Position *p, Move m);
     file = fopen([filename UTF8String], "rb");
     assert(file != NULL);
     stat([filename UTF8String], &fs);
-    size = fs.st_size;
+    size = ( int )fs.st_size;
 
     firstKey = read_uint64(file) & BOOK_KEY_MASK;
     fseek(file, size-16, SEEK_SET);
