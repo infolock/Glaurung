@@ -6,6 +6,12 @@ Free UCI Chess engine created by Tord Romstad  http://www.glaurungchess.com/ .  
 ## iOS Support
 This will work for any devices running iOS 7+
 
+## Current Plans
+I've completed the transition of the code ( which seems to have been built with iOS SDK 3.0(ish) ) and brought it into a working iOS 8 environment.  I've also converted it over to be ARC with 1 minor and outstanding issue ( see Known Issues below ).  However, the one known issue is related to the "Remote PC" feature.  So, unless you plan to try that ( which I haven't tried myself yet ), be warned that you may need to first resolve that small problem.
+
+With all that being said, the ultimate goal is to take this from being an Objective C iOS 8.0 source to a Swift iOS 8 source.  Its a large build with a sh!t ton of work, but if this can be converted to Swift I believe it will be well worth the effort.
+
+
 ## Known Issue(s)
 
 ### 1 Unresolved ARC Issue Remaining
